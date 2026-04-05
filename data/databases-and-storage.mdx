@@ -1,0 +1,207 @@
+---
+title: "Databases & Storage"
+description: "Python libraries for ORMs, database drivers, embedded databases, caching, full-text search, and data serialization."
+---
+
+Python has first-class support for every major database and storage paradigm. This page covers object-relational mappers, low-level drivers, embedded databases, caching layers, search engines, and serialization formats.
+
+## ORM
+
+Libraries that implement Object-Relational Mapping or data mapping techniques.
+
+### Relational Databases
+
+<CardGroup cols={2}>
+  <Card title="SQLAlchemy" icon="database" href="https://github.com/sqlalchemy/sqlalchemy">
+    The Python SQL Toolkit and Object Relational Mapper.
+  </Card>
+  <Card title="SQLModel" icon="table" href="https://github.com/fastapi/sqlmodel">
+    SQLModel is based on Python type annotations, and powered by Pydantic and SQLAlchemy.
+  </Card>
+  <Card title="django.db.models" icon="shapes" href="https://github.com/django/django">
+    The Django ORM.
+  </Card>
+  <Card title="peewee" icon="feather" href="https://github.com/coleifer/peewee">
+    A small, expressive ORM.
+  </Card>
+  <Card title="dataset" icon="box-archive" href="https://github.com/pudo/dataset">
+    Store Python dicts in a database — works with SQLite, MySQL, and PostgreSQL.
+  </Card>
+  <Card title="pony" icon="horse" href="https://github.com/ponyorm/pony/">
+    ORM that provides a generator-oriented interface to SQL.
+  </Card>
+  <Card title="tortoise-orm" icon="clock" href="https://github.com/tortoise/tortoise-orm">
+    An easy-to-use asyncio ORM inspired by Django, with relations support.
+  </Card>
+</CardGroup>
+
+```python SQLAlchemy
+from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy.orm import DeclarativeBase, Session
+
+class Base(DeclarativeBase):
+    pass
+
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    email = Column(String, unique=True)
+
+engine = create_engine("sqlite:///example.db")
+Base.metadata.create_all(engine)
+
+with Session(engine) as session:
+    session.add(User(name="Alice", email="alice@example.com"))
+    session.commit()
+```
+
+### NoSQL Databases
+
+<CardGroup cols={2}>
+  <Card title="mongoengine" icon="leaf" href="https://github.com/MongoEngine/mongoengine">
+    A Python Object-Document-Mapper for working with MongoDB.
+  </Card>
+  <Card title="beanie" icon="seedling" href="https://github.com/BeanieODM/beanie">
+    An asynchronous Python object-document mapper (ODM) for MongoDB.
+  </Card>
+  <Card title="pynamodb" icon="cloud" href="https://github.com/pynamodb/PynamoDB">
+    A Pythonic interface for Amazon DynamoDB.
+  </Card>
+</CardGroup>
+
+---
+
+## Database Drivers
+
+Libraries for connecting and operating databases.
+
+### Relational
+
+<CardGroup cols={2}>
+  <Card title="psycopg" icon="elephant" href="https://github.com/psycopg/psycopg">
+    The most popular PostgreSQL adapter for Python.
+  </Card>
+  <Card title="mysqlclient" icon="circle-dot" href="https://github.com/PyMySQL/mysqlclient">
+    MySQL connector with Python 3 support (mysql-python fork).
+  </Card>
+  <Card title="pymysql" icon="circle" href="https://github.com/PyMySQL/PyMySQL">
+    A pure Python MySQL driver compatible to mysql-python.
+  </Card>
+  <Card title="sqlite-utils" icon="hard-drive" href="https://github.com/simonw/sqlite-utils">
+    Python CLI utility and library for manipulating SQLite databases.
+  </Card>
+  <Card title="clickhouse-driver" icon="bolt" href="https://github.com/mymarilyn/clickhouse-driver">
+    Python driver with native interface for ClickHouse.
+  </Card>
+  <Card title="mssql-python" icon="microsoft" href="https://github.com/microsoft/mssql-python">
+    Official Microsoft driver for SQL Server and Azure SQL, built on ODBC for high performance and low memory usage.
+  </Card>
+</CardGroup>
+
+### NoSQL
+
+<CardGroup cols={2}>
+  <Card title="redis-py" icon="server" href="https://github.com/redis/redis-py">
+    The Python client for Redis.
+  </Card>
+  <Card title="pymongo" icon="leaf" href="https://github.com/mongodb/mongo-python-driver">
+    The official Python client for MongoDB.
+  </Card>
+  <Card title="cassandra-driver" icon="circle-nodes" href="https://github.com/apache/cassandra-python-driver">
+    The Python Driver for Apache Cassandra.
+  </Card>
+  <Card title="django-mongodb-backend" icon="plug" href="https://github.com/mongodb/django-mongodb-backend">
+    Official MongoDB database backend for Django.
+  </Card>
+</CardGroup>
+
+```python redis-py
+import redis
+
+r = redis.Redis(host="localhost", port=6379, decode_responses=True)
+r.set("name", "Alice")
+r.expire("name", 3600)  # expire in 1 hour
+print(r.get("name"))
+```
+
+---
+
+## Database
+
+Databases implemented in Python.
+
+<CardGroup cols={2}>
+  <Card title="duckdb" icon="duck" href="https://github.com/duckdb/duckdb">
+    An in-process SQL OLAP database management system; optimized for analytics and fast queries, similar to SQLite but for analytical workloads.
+  </Card>
+  <Card title="chromadb" icon="circle-half-stroke" href="https://github.com/chroma-core/chroma">
+    An open-source embedding database for building AI applications with embeddings and semantic search.
+  </Card>
+  <Card title="tinydb" icon="file-code" href="https://github.com/msiemens/tinydb">
+    A tiny, document-oriented database.
+  </Card>
+  <Card title="pickledb" icon="jar" href="https://github.com/patx/pickledb">
+    A simple and lightweight key-value store for Python.
+  </Card>
+  <Card title="ZODB" icon="object-group" href="https://github.com/zopefoundation/ZODB">
+    A native object database for Python. A key-value and object graph database.
+  </Card>
+</CardGroup>
+
+---
+
+## Caching
+
+Libraries for caching data.
+
+<CardGroup cols={2}>
+  <Card title="cachetools" icon="clock-rotate-left" href="https://github.com/tkem/cachetools">
+    Extensible memoizing collections and decorators.
+  </Card>
+  <Card title="python-diskcache" icon="floppy-disk" href="https://github.com/grantjenks/python-diskcache">
+    SQLite and file backed cache backend with faster lookups than memcached and redis.
+  </Card>
+  <Card title="django-cacheops" icon="rotate" href="https://github.com/Suor/django-cacheops">
+    A slick ORM cache with automatic granular event-driven invalidation.
+  </Card>
+  <Card title="dogpile.cache" icon="layer-group" href="https://github.com/sqlalchemy/dogpile.cache">
+    dogpile.cache is a next generation replacement for Beaker made by the same authors.
+  </Card>
+</CardGroup>
+
+---
+
+## Search
+
+Libraries and software for indexing and performing search queries on data.
+
+<CardGroup cols={2}>
+  <Card title="elasticsearch-py" icon="magnifying-glass" href="https://github.com/elastic/elasticsearch-py">
+    The official low-level Python client for Elasticsearch.
+  </Card>
+  <Card title="django-haystack" icon="filter" href="https://github.com/django-haystack/django-haystack">
+    Modular search for Django.
+  </Card>
+  <Card title="pysolr" icon="search" href="https://github.com/django-haystack/pysolr">
+    A lightweight Python wrapper for Apache Solr.
+  </Card>
+</CardGroup>
+
+---
+
+## Serialization
+
+Libraries for serializing complex data types.
+
+<CardGroup cols={2}>
+  <Card title="marshmallow" icon="arrows-left-right" href="https://github.com/marshmallow-code/marshmallow">
+    A lightweight library for converting complex objects to and from simple Python datatypes.
+  </Card>
+  <Card title="orjson" icon="brackets-curly" href="https://github.com/ijl/orjson">
+    Fast, correct JSON library.
+  </Card>
+  <Card title="msgpack" icon="box" href="https://github.com/msgpack/msgpack-python">
+    MessagePack serializer implementation for Python.
+  </Card>
+</CardGroup>

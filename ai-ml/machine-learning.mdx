@@ -1,0 +1,132 @@
+---
+title: "Machine Learning"
+description: "Libraries for classical machine learning, gradient boosting, probabilistic models, and AutoML in Python."
+---
+
+Python has a rich ecosystem of machine learning libraries covering gradient boosting, probabilistic graphical models, AutoML, distributed training, and synthetic data generation. Also see [awesome-machine-learning](https://github.com/josephmisiti/awesome-machine-learning#python).
+
+<Tip>
+  **scikit-learn** is the starting point for most ML projects. For structured/tabular data competitions and production workloads, **xgboost**, **lightgbm**, and **catboost** are the dominant gradient boosting options.
+</Tip>
+
+<CardGroup cols={2}>
+  <Card
+    title="catboost"
+    icon="cat"
+    href="https://github.com/catboost/catboost"
+  >
+    A fast, scalable, high performance gradient boosting on decision trees library.
+  </Card>
+  <Card
+    title="feature_engine"
+    icon="wrench"
+    href="https://github.com/feature-engine/feature_engine"
+  >
+    sklearn compatible API with the widest toolset for feature engineering and selection.
+  </Card>
+  <Card
+    title="h2o"
+    icon="droplet"
+    href="https://github.com/h2oai/h2o-3"
+  >
+    Open Source Fast Scalable Machine Learning Platform.
+  </Card>
+  <Card
+    title="lightgbm"
+    icon="leaf"
+    href="https://github.com/lightgbm-org/LightGBM"
+  >
+    A fast, distributed, high performance gradient boosting framework.
+  </Card>
+  <Card
+    title="mindsdb"
+    icon="database"
+    href="https://github.com/mindsdb/mindsdb"
+  >
+    MindsDB is an open source AI layer for existing databases that allows you to effortlessly develop, train and deploy state-of-the-art machine learning models using standard queries.
+  </Card>
+  <Card
+    title="pgmpy"
+    icon="diagram-project"
+    href="https://github.com/pgmpy/pgmpy"
+  >
+    A Python library for probabilistic graphical models and Bayesian networks.
+  </Card>
+  <Card
+    title="scikit-learn"
+    icon="star"
+    href="https://github.com/scikit-learn/scikit-learn"
+  >
+    The most popular Python library for Machine Learning with extensive documentation and community support.
+  </Card>
+  <Card
+    title="spark.ml"
+    icon="fire-flame-curved"
+    href="https://github.com/apache/spark"
+  >
+    Apache Spark's scalable Machine Learning library for distributed computing.
+  </Card>
+  <Card
+    title="TabGAN"
+    icon="table"
+    href="https://github.com/Diyago/Tabular-data-generation"
+  >
+    Synthetic tabular data generation using GANs, Diffusion Models, and LLMs.
+  </Card>
+  <Card
+    title="xgboost"
+    icon="bolt"
+    href="https://github.com/dmlc/xgboost"
+  >
+    A scalable, portable, and distributed gradient boosting library.
+  </Card>
+</CardGroup>
+
+## Example: classification pipeline with scikit-learn
+
+```python
+from sklearn.datasets import load_iris
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+# Load data
+X, y = load_iris(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Build a pipeline with preprocessing and a classifier
+pipeline = Pipeline([
+    ("scaler", StandardScaler()),
+    ("classifier", RandomForestClassifier(n_estimators=100, random_state=42)),
+])
+
+pipeline.fit(X_train, y_train)
+predictions = pipeline.predict(X_test)
+
+print(classification_report(y_test, predictions, target_names=["setosa", "versicolor", "virginica"]))
+```
+
+## Example: gradient boosting with XGBoost
+
+```python
+import xgboost as xgb
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+X, y = make_classification(n_samples=1000, n_features=20, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+model = xgb.XGBClassifier(
+    n_estimators=200,
+    max_depth=6,
+    learning_rate=0.1,
+    eval_metric="logloss",
+)
+model.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
+
+preds = model.predict(X_test)
+print(f"Accuracy: {accuracy_score(y_test, preds):.4f}")
+```

@@ -1,0 +1,178 @@
+---
+title: 'Python Language & Implementations'
+description: 'Alternative Python runtimes, built-in class enhancements, functional programming utilities, async concurrency, and date/time libraries.'
+---
+
+Python is more than CPython. This page covers the spectrum of Python implementations, the libraries that extend and enrich its built-in types, tools for functional and asynchronous programming, and batteries for working with dates and times.
+
+## Implementations
+
+_Alternative and specialised implementations of the Python language._
+
+<CardGroup cols={2}>
+  <Card title="cpython" icon="c" href="https://github.com/python/cpython">
+    Default, most widely used implementation of the Python programming language written in C.
+  </Card>
+  <Card title="cython" icon="bolt" href="https://github.com/cython/cython">
+    Optimizing Static Compiler for Python.
+  </Card>
+  <Card title="ironpython" icon="microsoft" href="https://github.com/IronLanguages/ironpython3">
+    Implementation of the Python programming language written in C#.
+  </Card>
+  <Card title="micropython" icon="microchip" href="https://github.com/micropython/micropython">
+    A lean and efficient Python programming language implementation.
+  </Card>
+  <Card title="pyodide" icon="globe" href="https://github.com/pyodide/pyodide">
+    Python distribution for the browser and Node.js based on WebAssembly.
+  </Card>
+  <Card title="pypy" icon="rocket" href="https://github.com/pypy/pypy">
+    A very fast and compliant implementation of the Python language.
+  </Card>
+</CardGroup>
+
+## Built-in Classes Enhancement
+
+_Libraries for enhancing Python built-in classes._
+
+<CardGroup cols={2}>
+  <Card title="attrs" icon="layer-group" href="https://github.com/python-attrs/attrs">
+    Replacement for `__init__`, `__eq__`, `__repr__`, etc. boilerplate in class definitions.
+  </Card>
+  <Card title="bidict" icon="arrow-right-arrow-left" href="https://github.com/jab/bidict">
+    Efficient, Pythonic bidirectional map data structures and related functionality.
+  </Card>
+  <Card title="box" icon="box" href="https://github.com/cdgriffith/Box">
+    Python dictionaries with advanced dot notation access.
+  </Card>
+</CardGroup>
+
+```python
+# attrs — clean class definitions
+import attrs
+
+@attrs.define
+class Point:
+    x: float
+    y: float
+
+    def distance_from_origin(self) -> float:
+        return (self.x ** 2 + self.y ** 2) ** 0.5
+
+p = Point(3.0, 4.0)
+print(p.distance_from_origin())  # 5.0
+```
+
+## Functional Programming
+
+_Functional Programming with Python._
+
+<CardGroup cols={2}>
+  <Card title="coconut" icon="tree" href="https://github.com/evhub/coconut">
+    A variant of Python built for simple, elegant, Pythonic functional programming.
+  </Card>
+  <Card title="functools" icon="cube" href="https://docs.python.org/3/library/functools.html">
+    (Python standard library) Higher-order functions and operations on callable objects.
+  </Card>
+  <Card title="funcy" icon="wand-magic-sparkles" href="https://github.com/Suor/funcy">
+    A fancy and practical functional tools.
+  </Card>
+  <Card title="more-itertools" icon="list" href="https://github.com/erikrose/more-itertools">
+    More routines for operating on iterables, beyond `itertools`.
+  </Card>
+  <Card title="returns" icon="rotate-left" href="https://github.com/dry-python/returns">
+    A set of type-safe monads, transformers, and composition utilities.
+  </Card>
+  <Card title="toolz" icon="toolbox" href="https://github.com/pytoolz/toolz">
+    A collection of functional utilities for iterators, functions, and dictionaries. Also available as cytoolz for Cython-accelerated performance.
+  </Card>
+</CardGroup>
+
+```python
+# toolz functional utilities
+from toolz import curry, compose, pipe
+
+@curry
+def add(x, y):
+    return x + y
+
+add5 = add(5)
+result = pipe([1, 2, 3, 4], lambda lst: map(add5, lst), list)
+print(result)  # [6, 7, 8, 9]
+```
+
+## Asynchronous Programming
+
+_Libraries for asynchronous, concurrent and parallel execution. Also see [awesome-asyncio](https://github.com/timofurrer/awesome-asyncio)._
+
+<CardGroup cols={2}>
+  <Card title="anyio" icon="network-wired" href="https://github.com/agronholm/anyio">
+    A high-level async concurrency and networking framework that works on top of asyncio or trio.
+  </Card>
+  <Card title="asyncio" icon="rotate" href="https://docs.python.org/3/library/asyncio.html">
+    (Python standard library) Asynchronous I/O, event loop, coroutines and tasks.
+  </Card>
+  <Card title="concurrent.futures" icon="arrows-spin" href="https://docs.python.org/3/library/concurrent.futures.html">
+    (Python standard library) A high-level interface for asynchronously executing callables.
+  </Card>
+  <Card title="gevent" icon="leaf" href="https://github.com/gevent/gevent">
+    A coroutine-based Python networking library that uses greenlet.
+  </Card>
+  <Card title="multiprocessing" icon="server" href="https://docs.python.org/3/library/multiprocessing.html">
+    (Python standard library) Process-based parallelism.
+  </Card>
+  <Card title="trio" icon="circle-nodes" href="https://github.com/python-trio/trio">
+    A friendly library for async concurrency and I/O.
+  </Card>
+  <Card title="twisted" icon="plug" href="https://github.com/twisted/twisted">
+    An event-driven networking engine.
+  </Card>
+  <Card title="uvloop" icon="gauge-high" href="https://github.com/MagicStack/uvloop">
+    Ultra fast asyncio event loop.
+  </Card>
+</CardGroup>
+
+```python
+# asyncio — async programming
+import asyncio
+
+async def fetch_data(url: str) -> dict:
+    await asyncio.sleep(0.1)  # simulate network call
+    return {"url": url, "status": 200}
+
+async def main():
+    tasks = [fetch_data(f"https://api.example.com/{i}") for i in range(5)]
+    results = await asyncio.gather(*tasks)
+    print(f"Fetched {len(results)} items")
+
+asyncio.run(main())
+```
+
+## Date and Time
+
+_Libraries for working with dates and times._
+
+<CardGroup cols={2}>
+  <Card title="dateparser" icon="calendar-check" href="https://github.com/scrapinghub/dateparser">
+    A Python parser for human-readable dates in dozens of languages.
+  </Card>
+  <Card title="dateutil" icon="calendar-days" href="https://github.com/dateutil/dateutil">
+    Extensions to the standard Python datetime module.
+  </Card>
+  <Card title="pendulum" icon="clock" href="https://github.com/python-pendulum/pendulum">
+    Python datetimes made easy.
+  </Card>
+  <Card title="zoneinfo" icon="earth-americas" href="https://docs.python.org/3/library/zoneinfo.html">
+    (Python standard library) IANA time zone support. Brings the tz database into Python.
+  </Card>
+</CardGroup>
+
+```python
+# pendulum — better datetimes
+import pendulum
+
+now = pendulum.now("Europe/London")
+past = pendulum.datetime(2024, 1, 1)
+
+print(now.diff_for_humans(past))  # "1 year ago"
+print(now.in_timezone("Asia/Tokyo").to_datetime_string())
+```

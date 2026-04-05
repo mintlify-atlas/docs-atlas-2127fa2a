@@ -1,0 +1,222 @@
+---
+title: "Testing and Debugging"
+description: "A curated guide to Python testing frameworks, mock libraries, debugging tools, and profilers from the Awesome Python list."
+---
+
+Python has a mature ecosystem for testing and debugging. This page covers testing frameworks, test runners, GUI and web testing tools, mock utilities, object factories, code coverage, fake data generators, and debuggers.
+
+## Testing
+
+### Frameworks
+
+<CardGroup cols={2}>
+  <Card title="pytest" icon="flask" href="https://github.com/pytest-dev/pytest">
+    A mature full-featured Python testing tool.
+  </Card>
+  <Card title="hypothesis" icon="shuffle" href="https://github.com/HypothesisWorks/hypothesis">
+    Hypothesis is an advanced Quickcheck style property based testing library.
+  </Card>
+  <Card title="robotframework" icon="robot" href="https://github.com/robotframework/robotframework">
+    A generic test automation framework.
+  </Card>
+  <Card title="scanapi" icon="magnifying-glass" href="https://github.com/scanapi/scanapi">
+    Automated Testing and Documentation for your REST API.
+  </Card>
+  <Card title="unittest" icon="check-double" href="https://docs.python.org/3/library/unittest.html">
+    (Python standard library) Unit testing framework.
+  </Card>
+</CardGroup>
+
+### Basic pytest example
+
+```python pytest_example.py
+import pytest
+
+def add(a, b):
+    return a + b
+
+def test_add():
+    assert add(2, 3) == 5
+    assert add(-1, 1) == 0
+    assert add(0, 0) == 0
+
+# Run with: pytest pytest_example.py -v
+```
+
+### Property-based testing with hypothesis
+
+```python hypothesis_example.py
+from hypothesis import given, strategies as st
+
+@given(st.integers(), st.integers())
+def test_add_is_commutative(a, b):
+    assert a + b == b + a
+```
+
+### Test Runners
+
+<CardGroup cols={2}>
+  <Card title="nox" icon="arrows-rotate" href="https://github.com/wntrblm/nox">
+    Flexible test automation for Python.
+  </Card>
+  <Card title="tox" icon="box" href="https://github.com/tox-dev/tox">
+    Auto builds and tests distributions in multiple Python versions.
+  </Card>
+</CardGroup>
+
+### GUI / Web Testing
+
+<CardGroup cols={2}>
+  <Card title="playwright-python" icon="globe" href="https://github.com/microsoft/playwright-python">
+    Python version of the Playwright testing and automation library.
+  </Card>
+  <Card title="selenium" icon="browser" href="https://github.com/SeleniumHQ/selenium">
+    Python bindings for Selenium WebDriver.
+  </Card>
+  <Card title="locust" icon="bug" href="https://github.com/locustio/locust">
+    Scalable user load testing tool written in Python.
+  </Card>
+  <Card title="pyautogui" icon="computer-mouse" href="https://github.com/asweigart/pyautogui">
+    PyAutoGUI is a cross-platform GUI automation Python module for human beings.
+  </Card>
+  <Card title="schemathesis" icon="file-code" href="https://github.com/schemathesis/schemathesis">
+    A tool for automatic property-based testing of web applications built with Open API / Swagger specifications.
+  </Card>
+</CardGroup>
+
+### Mock
+
+<CardGroup cols={2}>
+  <Card title="freezegun" icon="clock" href="https://github.com/spulec/freezegun">
+    Travel through time by mocking the datetime module.
+  </Card>
+  <Card title="mock" icon="mask" href="https://docs.python.org/3/library/unittest.mock.html">
+    (Python standard library) A mocking and patching library.
+  </Card>
+  <Card title="mocket" icon="plug" href="https://github.com/mindflayer/python-mocket">
+    A socket mock framework with gevent/asyncio/SSL support.
+  </Card>
+  <Card title="responses" icon="arrow-right-arrow-left" href="https://github.com/getsentry/responses">
+    A utility library for mocking out the requests Python library.
+  </Card>
+  <Card title="vcrpy" icon="film" href="https://github.com/kevin1024/vcrpy">
+    Record and replay HTTP interactions on your tests.
+  </Card>
+</CardGroup>
+
+### pytest with fixtures and mocking
+
+```python mock_example.py
+from unittest.mock import patch, MagicMock
+import pytest
+
+@pytest.fixture
+def mock_api():
+    with patch("myapp.api_client") as mock:
+        mock.get.return_value = MagicMock(status_code=200, json=lambda: {"data": []})
+        yield mock
+
+def test_fetch_data(mock_api):
+    from myapp import fetch_data
+    result = fetch_data()
+    assert result == []
+    mock_api.get.assert_called_once()
+```
+
+### Object Factories
+
+<CardGroup cols={2}>
+  <Card title="factory_boy" icon="industry" href="https://github.com/FactoryBoy/factory_boy">
+    A test fixtures replacement for Python.
+  </Card>
+  <Card title="polyfactory" icon="cubes" href="https://github.com/litestar-org/polyfactory">
+    Mock data generation library with support to classes (continuation of `pydantic-factories`).
+  </Card>
+</CardGroup>
+
+```python factory_boy_example.py
+import factory
+from myapp.models import User
+
+class UserFactory(factory.Factory):
+    class Meta:
+        model = User
+    name = factory.Faker("name")
+    email = factory.Faker("email")
+    age = factory.Faker("random_int", min=18, max=80)
+
+user = UserFactory()
+```
+
+### Code Coverage
+
+<CardGroup cols={2}>
+  <Card title="coverage" icon="chart-pie" href="https://github.com/coveragepy/coveragepy">
+    Code coverage measurement.
+  </Card>
+</CardGroup>
+
+### Fake Data
+
+<CardGroup cols={2}>
+  <Card title="faker" icon="wand-magic-sparkles" href="https://github.com/joke2k/faker">
+    A Python package that generates fake data.
+  </Card>
+  <Card title="mimesis" icon="user-secret" href="https://github.com/lk-geimfari/mimesis">
+    A Python library that helps you generate fake data.
+  </Card>
+</CardGroup>
+
+---
+
+## Debugging Tools
+
+### pdb-like Debuggers
+
+<CardGroup cols={2}>
+  <Card title="ipdb" icon="terminal" href="https://github.com/gotcha/ipdb">
+    IPython-enabled pdb.
+  </Card>
+  <Card title="pudb" icon="display" href="https://github.com/inducer/pudb">
+    A full-screen, console-based Python debugger.
+  </Card>
+</CardGroup>
+
+### Tracing
+
+<CardGroup cols={2}>
+  <Card title="python-hunter" icon="crosshairs" href="https://github.com/ionelmc/python-hunter">
+    A flexible code tracing toolkit.
+  </Card>
+  <Card title="manhole" icon="circle-nodes" href="https://github.com/ionelmc/python-manhole">
+    Debugging UNIX socket connections and present the stacktraces for all threads and an interactive prompt.
+  </Card>
+</CardGroup>
+
+### Profilers
+
+<CardGroup cols={2}>
+  <Card title="py-spy" icon="gauge-high" href="https://github.com/benfred/py-spy">
+    A sampling profiler for Python programs. Written in Rust.
+  </Card>
+  <Card title="scalene" icon="chart-line" href="https://github.com/plasma-umass/scalene">
+    A high-performance, high-precision CPU, GPU, and memory profiler for Python.
+  </Card>
+</CardGroup>
+
+### Other Debugging Tools
+
+<CardGroup cols={2}>
+  <Card title="icecream" icon="ice-cream" href="https://github.com/gruns/icecream">
+    Inspect variables, expressions, and program execution with a single, simple function call.
+  </Card>
+  <Card title="django-debug-toolbar" icon="screwdriver-wrench" href="https://github.com/django-commons/django-debug-toolbar">
+    Display various debug information for Django.
+  </Card>
+  <Card title="flask-debugtoolbar" icon="screwdriver-wrench" href="https://github.com/pallets-eco/flask-debugtoolbar">
+    A port of the django-debug-toolbar to flask.
+  </Card>
+  <Card title="memory_graph" icon="diagram-project" href="https://github.com/bterwijn/memory_graph">
+    Visualize Python data at runtime to debug references, mutability, and aliasing.
+  </Card>
+</CardGroup>

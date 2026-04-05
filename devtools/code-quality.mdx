@@ -1,0 +1,202 @@
+---
+title: "Code Quality"
+description: "A curated guide to Python code analysis, linters, formatters, type checkers, interactive interpreters, documentation generators, and build tools from the Awesome Python list."
+---
+
+Writing quality Python code means using the right tools for analysis, formatting, type safety, documentation, and automation. This page covers static analysis, interactive interpreters, documentation generators, and build tools.
+
+## Code Analysis
+
+### Static Analysis
+
+<CardGroup cols={2}>
+  <Card title="code2flow" icon="diagram-project" href="https://github.com/scottrogowski/code2flow">
+    Turn your Python and JavaScript code into DOT flowcharts.
+  </Card>
+  <Card title="prospector" icon="magnifying-glass-chart" href="https://github.com/prospector-dev/prospector">
+    A tool to analyze Python code.
+  </Card>
+  <Card title="vulture" icon="crow" href="https://github.com/jendrikseipp/vulture">
+    A tool for finding and analyzing dead Python code.
+  </Card>
+</CardGroup>
+
+### Code Linters
+
+<CardGroup cols={2}>
+  <Card title="ruff" icon="bolt" href="https://github.com/astral-sh/ruff">
+    An extremely fast Python linter and code formatter.
+  </Card>
+  <Card title="flake8" icon="layer-group" href="https://github.com/PyCQA/flake8">
+    A wrapper around `pycodestyle`, `pyflakes` and McCabe.
+  </Card>
+  <Card title="pylint" icon="shield-check" href="https://github.com/pylint-dev/pylint">
+    A fully customizable source code analyzer.
+  </Card>
+  <Card title="bandit" icon="shield-halved" href="https://github.com/PyCQA/bandit">
+    A tool designed to find common security issues in Python code.
+  </Card>
+</CardGroup>
+
+### Code Formatters
+
+<CardGroup cols={2}>
+  <Card title="ruff" icon="bolt" href="https://github.com/astral-sh/ruff">
+    An extremely fast Python linter and code formatter.
+  </Card>
+  <Card title="black" icon="circle" href="https://github.com/psf/black">
+    The uncompromising Python code formatter.
+  </Card>
+  <Card title="isort" icon="arrow-down-a-z" href="https://github.com/PyCQA/isort">
+    A Python utility / library to sort imports.
+  </Card>
+</CardGroup>
+
+```bash ruff_usage.sh
+# ruff — fast linter and formatter
+ruff check .          # lint
+ruff check . --fix    # auto-fix
+ruff format .         # format code
+```
+
+```python black_example.py
+# black formatter (run via CLI)
+# black my_file.py
+# Before:
+x = {'a': 1, 'b': 2}
+y = [1,2,3]
+# After black:
+x = {"a": 1, "b": 2}
+y = [1, 2, 3]
+```
+
+### Refactoring
+
+<CardGroup cols={2}>
+  <Card title="rope" icon="scissors" href="https://github.com/python-rope/rope">
+    Rope is a python refactoring library.
+  </Card>
+</CardGroup>
+
+### Type Checkers
+
+<CardGroup cols={2}>
+  <Card title="mypy" icon="check" href="https://github.com/python/mypy">
+    Check variable types during compile time.
+  </Card>
+  <Card title="ty" icon="bolt" href="https://github.com/astral-sh/ty">
+    An extremely fast Python type checker and language server.
+  </Card>
+  <Card title="pyre-check" icon="fire" href="https://github.com/facebook/pyre-check">
+    Performant type checking.
+  </Card>
+  <Card title="typeshed" icon="database" href="https://github.com/python/typeshed">
+    Collection of library stubs for Python, with static types.
+  </Card>
+</CardGroup>
+
+```bash mypy_usage.sh
+# mypy type checking
+mypy src/             # check types
+mypy --strict src/    # strict mode
+```
+
+### Type Annotation Generators
+
+<CardGroup cols={2}>
+  <Card title="monkeytype" icon="monkey" href="https://github.com/Instagram/MonkeyType">
+    A system for Python that generates static type annotations by collecting runtime types.
+  </Card>
+  <Card title="pytype" icon="magnifying-glass" href="https://github.com/google/pytype">
+    Pytype checks and infers types for Python code — without requiring type annotations.
+  </Card>
+</CardGroup>
+
+---
+
+## Algorithms and Design Patterns
+
+### Algorithms
+
+<CardGroup cols={2}>
+  <Card title="algorithms" icon="code-branch" href="https://github.com/keon/algorithms">
+    Minimal examples of data structures and algorithms.
+  </Card>
+  <Card title="thealgorithms" icon="list-ol" href="https://github.com/TheAlgorithms/Python">
+    All Algorithms implemented in Python.
+  </Card>
+  <Card title="sortedcontainers" icon="arrow-down-1-9" href="https://github.com/grantjenks/python-sortedcontainers">
+    Fast and pure-Python implementation of sorted collections.
+  </Card>
+</CardGroup>
+
+### Design Patterns
+
+<CardGroup cols={2}>
+  <Card title="python-patterns" icon="puzzle-piece" href="https://github.com/faif/python-patterns">
+    A collection of design patterns in Python.
+  </Card>
+  <Card title="transitions" icon="right-left" href="https://github.com/pytransitions/transitions">
+    A lightweight, object-oriented finite state machine implementation.
+  </Card>
+</CardGroup>
+
+---
+
+## Interactive Interpreter
+
+<CardGroup cols={2}>
+  <Card title="jupyter" icon="book-open" href="https://github.com/jupyter/notebook">
+    A rich toolkit to help you make the most out of using Python interactively.
+  </Card>
+  <Card title="marimo" icon="wand-magic-sparkles" href="https://github.com/marimo-team/marimo">
+    Transform data and train models, feels like a next-gen notebook, stored as Git-friendly Python.
+  </Card>
+  <Card title="ptpython" icon="terminal" href="https://github.com/prompt-toolkit/ptpython">
+    Advanced Python REPL built on top of the python-prompt-toolkit.
+  </Card>
+</CardGroup>
+
+---
+
+## Documentation
+
+<CardGroup cols={2}>
+  <Card title="sphinx" icon="book" href="https://github.com/sphinx-doc/sphinx/">
+    Python Documentation generator.
+  </Card>
+  <Card title="mkdocs" icon="file-lines" href="https://github.com/mkdocs/mkdocs/">
+    Markdown friendly documentation generator.
+  </Card>
+  <Card title="pdoc" icon="code" href="https://github.com/mitmproxy/pdoc">
+    Epydoc replacement to auto generate API documentation for Python libraries.
+  </Card>
+  <Card title="diagrams" icon="diagram-project" href="https://github.com/mingrammer/diagrams">
+    Diagram as Code.
+  </Card>
+</CardGroup>
+
+---
+
+## Build Tools
+
+<CardGroup cols={2}>
+  <Card title="invoke" icon="terminal" href="https://github.com/pyinvoke/invoke">
+    A tool for managing shell-oriented subprocesses and organizing executable Python code into CLI-invokable tasks.
+  </Card>
+  <Card title="doit" icon="list-check" href="https://github.com/pydoit/doit">
+    A task runner and build tool.
+  </Card>
+  <Card title="scons" icon="hammer" href="https://github.com/SCons/scons">
+    A software construction tool.
+  </Card>
+  <Card title="pybuilder" icon="cubes" href="https://github.com/pybuilder/pybuilder">
+    A continuous build tool written in pure Python.
+  </Card>
+  <Card title="platformio" icon="microchip" href="https://github.com/platformio/platformio-core">
+    A console tool to build code with different development platforms.
+  </Card>
+  <Card title="bitbake" icon="layer-group" href="https://github.com/openembedded/bitbake">
+    A make-like build tool for embedded Linux.
+  </Card>
+</CardGroup>

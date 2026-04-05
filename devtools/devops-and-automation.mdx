@@ -1,0 +1,217 @@
+---
+title: "DevOps and Automation"
+description: "A curated guide to Python libraries for DevOps, distributed computing, task queues, job scheduling, logging, and network virtualization from the Awesome Python list."
+---
+
+Python is widely used across the DevOps and automation space, from infrastructure management to distributed task processing, workflow orchestration, and structured logging. This page covers the most important libraries in each area.
+
+## DevOps Tools
+
+### Cloud Providers
+
+<CardGroup cols={2}>
+  <Card title="boto3" icon="cloud" href="https://github.com/boto/boto3">
+    Python interface to Amazon Web Services.
+  </Card>
+  <Card title="awscli" icon="terminal" href="https://github.com/aws/aws-cli">
+    Universal Command Line Interface for Amazon Web Services.
+  </Card>
+</CardGroup>
+
+### Configuration Management
+
+<CardGroup cols={2}>
+  <Card title="ansible" icon="server" href="https://github.com/ansible/ansible">
+    A radically simple IT automation platform.
+  </Card>
+  <Card title="saltstack" icon="cubes" href="https://github.com/saltstack/salt">
+    Infrastructure automation and management system.
+  </Card>
+  <Card title="pyinfra" icon="gears" href="https://github.com/pyinfra-dev/pyinfra">
+    A versatile CLI tools and python libraries to automate infrastructure.
+  </Card>
+  <Card title="cloudinit" icon="cloud-sun" href="https://github.com/canonical/cloud-init">
+    A multi-distribution package that handles early initialization of a cloud instance.
+  </Card>
+  <Card title="openstack" icon="network-wired" href="https://github.com/openstack/openstack">
+    Open source software for building private and public clouds.
+  </Card>
+</CardGroup>
+
+### Deployment
+
+<CardGroup cols={2}>
+  <Card title="fabric" icon="ship" href="https://github.com/fabric/fabric">
+    A simple, Pythonic tool for remote execution and deployment.
+  </Card>
+  <Card title="chalice" icon="bolt" href="https://github.com/aws/chalice">
+    A Python serverless microframework for AWS.
+  </Card>
+</CardGroup>
+
+```python fabric_example.py
+from fabric import Connection
+
+c = Connection("user@myserver.com")
+c.run("sudo systemctl restart myapp")
+c.put("dist/myapp.tar.gz", "/tmp/")
+```
+
+### Monitoring and Processes
+
+<CardGroup cols={2}>
+  <Card title="psutil" icon="chart-line" href="https://github.com/giampaolo/psutil">
+    A cross-platform process and system utilities module.
+  </Card>
+  <Card title="sentry-python" icon="bug" href="https://github.com/getsentry/sentry-python">
+    Sentry SDK for Python.
+  </Card>
+  <Card title="supervisor" icon="circle-play" href="https://github.com/Supervisor/supervisor">
+    Supervisor process control system for UNIX.
+  </Card>
+  <Card title="sh" icon="terminal" href="https://github.com/amoffat/sh">
+    A full-fledged subprocess replacement for Python.
+  </Card>
+</CardGroup>
+
+### Other
+
+<CardGroup cols={2}>
+  <Card title="pre-commit" icon="code-commit" href="https://github.com/pre-commit/pre-commit">
+    A framework for managing and maintaining multi-language pre-commit hooks.
+  </Card>
+  <Card title="chaostoolkit" icon="vial" href="https://github.com/chaostoolkit/chaostoolkit">
+    A Chaos Engineering toolkit &amp; Orchestration for Developers.
+  </Card>
+  <Card title="borg" icon="box-archive" href="https://github.com/borgbackup/borg">
+    A deduplicating archiver with compression and encryption.
+  </Card>
+</CardGroup>
+
+---
+
+## Distributed Computing
+
+### Batch Processing
+
+<CardGroup cols={2}>
+  <Card title="ray" icon="sun" href="https://github.com/ray-project/ray/">
+    A system for parallel and distributed Python that unifies the machine learning ecosystem.
+  </Card>
+  <Card title="dask" icon="diagram-project" href="https://github.com/dask/dask">
+    A flexible parallel computing library for analytic computing.
+  </Card>
+  <Card title="pyspark" icon="fire-flame-curved" href="https://github.com/apache/spark">
+    Apache Spark Python API.
+  </Card>
+  <Card title="luigi" icon="list-check" href="https://github.com/spotify/luigi">
+    A module that helps you build complex pipelines of batch jobs.
+  </Card>
+  <Card title="joblib" icon="gear" href="https://github.com/joblib/joblib">
+    A set of tools to provide lightweight pipelining in Python.
+  </Card>
+  <Card title="mpi4py" icon="network-wired" href="https://github.com/mpi4py/mpi4py">
+    Python bindings for MPI.
+  </Card>
+</CardGroup>
+
+---
+
+## Task Queues
+
+<CardGroup cols={2}>
+  <Card title="celery" icon="layer-group" href="https://github.com/celery/celery">
+    An asynchronous task queue/job queue based on distributed message passing.
+  </Card>
+  <Card title="dramatiq" icon="bolt" href="https://github.com/Bogdanp/dramatiq">
+    A fast and reliable background task processing library for Python 3.
+  </Card>
+  <Card title="rq" icon="list" href="https://github.com/rq/rq">
+    Simple job queues for Python.
+  </Card>
+  <Card title="huey" icon="clock" href="https://github.com/coleifer/huey">
+    Little multi-threaded task queue.
+  </Card>
+</CardGroup>
+
+```python celery_example.py
+from celery import Celery
+
+app = Celery("tasks", broker="redis://localhost:6379/0")
+
+@app.task
+def add(x, y):
+    return x + y
+
+# Call asynchronously:
+result = add.delay(4, 4)
+print(result.get(timeout=10))  # 8
+```
+
+---
+
+## Job Schedulers
+
+<CardGroup cols={2}>
+  <Card title="airflow" icon="wind" href="https://github.com/apache/airflow">
+    Airflow is a platform to programmatically author, schedule and monitor workflows.
+  </Card>
+  <Card title="dagster" icon="diagram-project" href="https://github.com/dagster-io/dagster">
+    An orchestration platform for the development, production, and observation of data assets.
+  </Card>
+  <Card title="prefect" icon="circle-check" href="https://github.com/PrefectHQ/prefect">
+    A modern workflow orchestration framework that makes it easy to build, schedule and monitor robust data pipelines.
+  </Card>
+  <Card title="apscheduler" icon="calendar" href="https://github.com/agronholm/apscheduler">
+    A light but powerful in-process task scheduler that lets you schedule functions.
+  </Card>
+  <Card title="schedule" icon="clock" href="https://github.com/dbader/schedule">
+    Python job scheduling for humans.
+  </Card>
+  <Card title="SpiffWorkflow" icon="code-branch" href="https://github.com/sartography/SpiffWorkflow">
+    A powerful workflow engine implemented in pure Python.
+  </Card>
+</CardGroup>
+
+---
+
+## Logging
+
+<CardGroup cols={2}>
+  <Card title="loguru" icon="scroll" href="https://github.com/Delgan/loguru">
+    Library which aims to bring enjoyable logging in Python.
+  </Card>
+  <Card title="structlog" icon="sitemap" href="https://github.com/hynek/structlog">
+    Structured logging made easy.
+  </Card>
+  <Card title="logging" icon="file-lines" href="https://docs.python.org/3/library/logging.html">
+    (Python standard library) Logging facility for Python.
+  </Card>
+  <Card title="logfmter" icon="align-left" href="https://github.com/josheppinette/python-logfmter">
+    A standard library compatible logfmt formatter.
+  </Card>
+</CardGroup>
+
+```python loguru_example.py
+from loguru import logger
+
+logger.add("app.log", rotation="10 MB", retention="7 days")
+logger.info("Server started on port {port}", port=8080)
+logger.error("Database connection failed: {err}", err="timeout")
+```
+
+---
+
+## Network Virtualization
+
+<CardGroup cols={2}>
+  <Card title="scapy" icon="network-wired" href="https://github.com/secdev/scapy">
+    A brilliant packet manipulation library.
+  </Card>
+  <Card title="napalm" icon="plug" href="https://github.com/napalm-automation/napalm">
+    Cross-vendor API to manipulate network devices.
+  </Card>
+  <Card title="mininet" icon="diagram-project" href="https://github.com/mininet/mininet">
+    A popular network emulator and API written in Python.
+  </Card>
+</CardGroup>

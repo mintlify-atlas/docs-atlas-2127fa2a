@@ -1,0 +1,232 @@
+---
+title: "Web frameworks and APIs"
+description: "Web frameworks, REST and GraphQL APIs, web servers, WebSocket libraries, template engines, and asset management tools for Python."
+---
+
+Python has a rich ecosystem of web frameworks ranging from batteries-included full-stack options to minimal microframeworks and high-performance async alternatives. This page covers frameworks for building web applications and APIs, serving them in production, handling real-time connections, templating HTML, and managing static assets.
+
+## Web frameworks
+
+Traditional full-stack web frameworks for building complete web applications.
+
+<Tabs>
+  <Tab title="Synchronous">
+    <CardGroup cols={2}>
+      <Card title="django" icon="layer-group" href="https://github.com/django/django">
+        The most popular web framework in Python.
+      </Card>
+      <Card title="flask" icon="flask" href="https://github.com/pallets/flask">
+        A microframework for Python.
+      </Card>
+      <Card title="bottle" icon="cube" href="https://github.com/bottlepy/bottle">
+        A fast and simple micro-framework distributed as a single file with no dependencies.
+      </Card>
+      <Card title="pyramid" icon="triangle-exclamation" href="https://github.com/Pylons/pyramid">
+        A small, fast, down-to-earth, open source Python web framework.
+      </Card>
+      <Card title="fasthtml" icon="bolt" href="https://github.com/AnswerDotAI/fasthtml">
+        The fastest way to create an HTML app.
+      </Card>
+      <Card title="masonite" icon="hammer" href="https://github.com/MasoniteFramework/masonite">
+        The modern and developer centric Python web framework.
+      </Card>
+    </CardGroup>
+  </Tab>
+  <Tab title="Asynchronous">
+    <CardGroup cols={2}>
+      <Card title="litestar" icon="star" href="https://github.com/litestar-org/litestar">
+        Production-ready, capable and extensible ASGI Web framework.
+      </Card>
+      <Card title="starlette" icon="server" href="https://github.com/Kludex/starlette">
+        A lightweight ASGI framework and toolkit for building high-performance async services.
+      </Card>
+      <Card title="tornado" icon="wind" href="https://github.com/tornadoweb/tornado">
+        A web framework and asynchronous networking library.
+      </Card>
+      <Card title="robyn" icon="rocket" href="https://github.com/sparckles/Robyn">
+        A high-performance async Python web framework with a Rust runtime.
+      </Card>
+      <Card title="reflex" icon="arrows-rotate" href="https://github.com/reflex-dev/reflex">
+        A framework for building reactive, full-stack web applications entirely with Python.
+      </Card>
+      <Card title="microdot" icon="circle-dot" href="https://github.com/miguelgrinberg/microdot">
+        The impossibly small web framework for Python and MicroPython.
+      </Card>
+    </CardGroup>
+  </Tab>
+</Tabs>
+
+### Django example
+
+```python
+from django.db import models
+
+class Article(models.Model):
+    title = models.CharField(max_length=200)
+    body = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+```
+
+### Flask example
+
+```python
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello_world():
+    return "<p>Hello, World!</p>"
+```
+
+## Web APIs
+
+Libraries for building RESTful and GraphQL APIs.
+
+<Tabs>
+  <Tab title="Django">
+    <CardGroup cols={2}>
+      <Card title="django-rest-framework" icon="code" href="https://github.com/encode/django-rest-framework">
+        A powerful and flexible toolkit to build web APIs.
+      </Card>
+      <Card title="django-ninja" icon="bolt" href="https://github.com/vitalik/django-ninja">
+        Fast, Django REST framework based on type hints and Pydantic.
+      </Card>
+      <Card title="strawberry-django" icon="leaf" href="https://github.com/strawberry-graphql/strawberry-django">
+        Strawberry GraphQL integration with Django.
+      </Card>
+    </CardGroup>
+  </Tab>
+  <Tab title="Flask">
+    <CardGroup cols={2}>
+      <Card title="apiflask" icon="flask" href="https://github.com/apiflask/apiflask">
+        A lightweight Python web API framework based on Flask and Marshmallow.
+      </Card>
+    </CardGroup>
+  </Tab>
+  <Tab title="Framework agnostic">
+    <CardGroup cols={2}>
+      <Card title="fastapi" icon="rocket" href="https://github.com/fastapi/fastapi">
+        A modern, fast, web framework for building APIs with standard Python type hints.
+      </Card>
+      <Card title="falcon" icon="feather" href="https://github.com/falconry/falcon">
+        A high-performance framework for building cloud APIs and web app backends.
+      </Card>
+      <Card title="sanic" icon="gauge-high" href="https://github.com/sanic-org/sanic">
+        A Python 3.6+ web server and web framework that's written to go fast.
+      </Card>
+      <Card title="strawberry" icon="leaf" href="https://github.com/strawberry-graphql/strawberry">
+        A GraphQL library that leverages Python type annotations for schema definition.
+      </Card>
+      <Card title="connexion" icon="link" href="https://github.com/spec-first/connexion">
+        A spec-first framework that automatically handles requests based on your OpenAPI specification.
+      </Card>
+      <Card title="webargs" icon="code" href="https://github.com/marshmallow-code/webargs">
+        A friendly library for parsing HTTP request arguments with built-in support for popular web frameworks.
+      </Card>
+    </CardGroup>
+  </Tab>
+</Tabs>
+
+### FastAPI example
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/items/{item_id}")
+async def read_item(item_id: int, q: str | None = None):
+    return {"item_id": item_id, "q": q}
+```
+
+## Web servers
+
+ASGI and WSGI compatible web servers for deploying Python applications.
+
+<Tabs>
+  <Tab title="ASGI">
+    <CardGroup cols={2}>
+      <Card title="uvicorn" icon="bolt" href="https://github.com/Kludex/uvicorn">
+        A lightning-fast ASGI server implementation, using uvloop and httptools.
+      </Card>
+      <Card title="hypercorn" icon="server" href="https://github.com/pgjones/hypercorn">
+        An ASGI and WSGI Server based on Hyper libraries and inspired by Gunicorn.
+      </Card>
+      <Card title="daphne" icon="plug" href="https://github.com/django/daphne">
+        An HTTP, HTTP/2 and WebSocket protocol server for ASGI and ASGI-HTTP.
+      </Card>
+      <Card title="granian" icon="gauge-high" href="https://github.com/emmett-framework/granian">
+        A Rust HTTP server for Python applications built on top of Hyper and Tokio, supporting WSGI/ASGI/RSGI.
+      </Card>
+    </CardGroup>
+  </Tab>
+  <Tab title="WSGI">
+    <CardGroup cols={2}>
+      <Card title="gunicorn" icon="horse" href="https://github.com/benoitc/gunicorn">
+        Pre-forked, ported from Ruby's Unicorn project.
+      </Card>
+      <Card title="uwsgi" icon="server" href="https://github.com/unbit/uwsgi">
+        A project aims at developing a full stack for building hosting services, written in C.
+      </Card>
+      <Card title="waitress" icon="clock" href="https://github.com/Pylons/waitress">
+        Multi-threaded, powers Pyramid.
+      </Card>
+    </CardGroup>
+  </Tab>
+  <Tab title="RPC">
+    <CardGroup cols={2}>
+      <Card title="grpcio" icon="network-wired" href="https://github.com/grpc/grpc">
+        HTTP/2-based RPC framework with Python bindings, built by Google.
+      </Card>
+      <Card title="rpyc" icon="arrows-left-right" href="https://github.com/tomerfiliba-org/rpyc">
+        A transparent and symmetric RPC library for Python.
+      </Card>
+    </CardGroup>
+  </Tab>
+</Tabs>
+
+## WebSocket
+
+Libraries for working with WebSocket connections.
+
+<CardGroup cols={2}>
+  <Card title="websockets" icon="plug" href="https://github.com/python-websockets/websockets">
+    A library for building WebSocket servers and clients with a focus on correctness and simplicity.
+  </Card>
+  <Card title="channels" icon="layer-group" href="https://github.com/django/channels">
+    Developer-friendly asynchrony for Django.
+  </Card>
+  <Card title="flask-socketio" icon="flask" href="https://github.com/miguelgrinberg/Flask-SocketIO">
+    Socket.IO integration for Flask applications.
+  </Card>
+  <Card title="autobahn-python" icon="road" href="https://github.com/crossbario/autobahn-python">
+    WebSocket & WAMP for Python on Twisted and asyncio.
+  </Card>
+</CardGroup>
+
+## Template engines
+
+Libraries and tools for HTML templating and lexing.
+
+<CardGroup cols={2}>
+  <Card title="jinja" icon="code" href="https://github.com/pallets/jinja">
+    A modern and designer friendly templating language.
+  </Card>
+  <Card title="mako" icon="bolt" href="https://github.com/sqlalchemy/mako">
+    Hyperfast and lightweight templating for the Python platform.
+  </Card>
+</CardGroup>
+
+## Web asset management
+
+Tools for managing, compressing, and minifying website assets.
+
+<CardGroup cols={2}>
+  <Card title="django-compressor" icon="compress" href="https://github.com/django-compressor/django-compressor">
+    Compresses linked and inline JavaScript or CSS into a single cached file.
+  </Card>
+  <Card title="django-storages" icon="database" href="https://github.com/jschneier/django-storages">
+    A collection of custom storage back ends for Django.
+  </Card>
+</CardGroup>

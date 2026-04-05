@@ -1,0 +1,124 @@
+---
+title: "HTTP clients, web scraping, and email"
+description: "HTTP client libraries, web scraping frameworks, content extraction tools, and email sending libraries for Python."
+---
+
+Python provides excellent libraries for making HTTP requests, automating browsers, extracting data from web pages, and sending email. This page covers the most widely used tools for working with the web at the protocol level and beyond.
+
+## HTTP clients
+
+Libraries for making HTTP requests and working with URLs.
+
+<CardGroup cols={2}>
+  <Card title="requests" icon="arrow-up-right-from-square" href="https://github.com/psf/requests">
+    HTTP Requests for Humans.
+  </Card>
+  <Card title="httpx" icon="bolt" href="https://github.com/encode/httpx">
+    A next generation HTTP client for Python.
+  </Card>
+  <Card title="aiohttp" icon="rotate" href="https://github.com/aio-libs/aiohttp">
+    Asynchronous HTTP client/server framework for asyncio and Python.
+  </Card>
+  <Card title="urllib3" icon="link" href="https://github.com/urllib3/urllib3">
+    A HTTP library with thread-safe connection pooling, file post support, sanity friendly.
+  </Card>
+  <Card title="furl" icon="magnifying-glass" href="https://github.com/gruns/furl">
+    A small Python library that makes parsing and manipulating URLs easy.
+  </Card>
+</CardGroup>
+
+### requests example
+
+```python
+import requests
+
+response = requests.get("https://api.github.com/repos/vinta/awesome-python")
+data = response.json()
+print(f"Stars: {data['stargazers_count']}")
+```
+
+### httpx async example
+
+```python
+import httpx
+import asyncio
+
+async def fetch():
+    async with httpx.AsyncClient() as client:
+        r = await client.get("https://httpbin.org/get")
+        return r.json()
+
+asyncio.run(fetch())
+```
+
+## Web scraping
+
+Libraries to automate web scraping and extract web content.
+
+<Tabs>
+  <Tab title="Frameworks">
+    <CardGroup cols={2}>
+      <Card title="scrapy" icon="spider" href="https://github.com/scrapy/scrapy">
+        A fast high-level screen scraping and web crawling framework.
+      </Card>
+      <Card title="browser-use" icon="browser" href="https://github.com/browser-use/browser-use">
+        Make websites accessible for AI agents with easy browser automation.
+      </Card>
+      <Card title="crawl4ai" icon="robot" href="https://github.com/unclecode/crawl4ai">
+        An open-source, LLM-friendly web crawler that provides lightning-fast, structured data extraction specifically designed for AI agents.
+      </Card>
+      <Card title="mechanicalsoup" icon="gear" href="https://github.com/MechanicalSoup/MechanicalSoup">
+        A Python library for automating interaction with websites.
+      </Card>
+    </CardGroup>
+  </Tab>
+  <Tab title="Content extraction">
+    <CardGroup cols={2}>
+      <Card title="trafilatura" icon="file-lines" href="https://github.com/adbar/trafilatura">
+        A tool for gathering text and metadata from the web, with built-in content filtering.
+      </Card>
+      <Card title="feedparser" icon="rss" href="https://github.com/kurtmckee/feedparser">
+        Universal feed parser.
+      </Card>
+      <Card title="html2text" icon="align-left" href="https://github.com/Alir3z4/html2text">
+        Convert HTML to Markdown-formatted text.
+      </Card>
+      <Card title="sumy" icon="compress" href="https://github.com/miso-belica/sumy">
+        A module for automatic summarization of text documents and HTML pages.
+      </Card>
+      <Card title="micawber" icon="link" href="https://github.com/coleifer/micawber">
+        A small library for extracting rich content from URLs.
+      </Card>
+    </CardGroup>
+  </Tab>
+</Tabs>
+
+### Scrapy spider example
+
+```python
+import scrapy
+
+class QuotesSpider(scrapy.Spider):
+    name = "quotes"
+    start_urls = ["https://quotes.toscrape.com"]
+
+    def parse(self, response):
+        for quote in response.css("div.quote"):
+            yield {
+                "text": quote.css("span.text::text").get(),
+                "author": quote.css("small.author::text").get(),
+            }
+```
+
+## Email
+
+Libraries for sending and parsing email, and mail server management.
+
+<CardGroup cols={2}>
+  <Card title="yagmail" icon="envelope" href="https://github.com/kootenpv/yagmail">
+    Yet another Gmail/SMTP client.
+  </Card>
+  <Card title="modoboa" icon="server" href="https://github.com/modoboa/modoboa">
+    A mail hosting and management platform including a modern Web UI.
+  </Card>
+</CardGroup>

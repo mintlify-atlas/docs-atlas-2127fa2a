@@ -1,0 +1,215 @@
+---
+title: "AI and Agents"
+description: "Libraries for building AI applications, LLM integrations, and autonomous agents."
+---
+
+Python's AI and agent ecosystem provides everything you need to build production-grade LLM-powered applications — from reusable agent skills and orchestration frameworks to structured data extraction and high-throughput model serving.
+
+<Tabs>
+  <Tab title="Agent Skills">
+    Reusable skill packs that extend agents with domain-specific capabilities.
+
+    <CardGroup cols={2}>
+      <Card
+        title="django-ai-plugins"
+        icon="puzzle-piece"
+        href="https://github.com/vintasoftware/django-ai-plugins"
+      >
+        Django backend agent skills for Django, DRF, Celery, and Django-specific code review.
+      </Card>
+      <Card
+        title="sentry-skills"
+        icon="bug"
+        href="https://github.com/getsentry/skills"
+      >
+        Python-focused engineering skills for code review, debugging, and backend workflows.
+      </Card>
+      <Card
+        title="trailofbits-skills"
+        icon="shield"
+        href="https://github.com/trailofbits/skills"
+      >
+        Python-friendly security skills for auditing, testing, and safer backend development.
+      </Card>
+    </CardGroup>
+  </Tab>
+
+  <Tab title="Orchestration">
+    Frameworks for composing agents, chains, and multi-step LLM workflows.
+
+    <Tip>
+      **langchain** and **pydantic-ai** are the most widely adopted orchestration libraries in production Python applications.
+    </Tip>
+
+    <CardGroup cols={2}>
+      <Card
+        title="autogen"
+        icon="robot"
+        href="https://github.com/microsoft/autogen"
+      >
+        A programming framework for building agentic AI applications.
+      </Card>
+      <Card
+        title="crewai"
+        icon="users"
+        href="https://github.com/crewAIInc/crewAI"
+      >
+        A framework for orchestrating role-playing autonomous AI agents for collaborative task solving.
+      </Card>
+      <Card
+        title="dspy"
+        icon="code"
+        href="https://github.com/stanfordnlp/dspy"
+      >
+        A framework for programming, not prompting, language models.
+      </Card>
+      <Card
+        title="langchain"
+        icon="link"
+        href="https://github.com/langchain-ai/langchain"
+      >
+        Building applications with LLMs through composability.
+      </Card>
+      <Card
+        title="pydantic-ai"
+        icon="check-circle"
+        href="https://github.com/pydantic/pydantic-ai"
+      >
+        A Python agent framework for building generative AI applications with structured schemas.
+      </Card>
+      <Card
+        title="TradingAgents"
+        icon="chart-line"
+        href="https://github.com/TauricResearch/TradingAgents"
+      >
+        A multi-agents LLM financial trading framework.
+      </Card>
+    </CardGroup>
+
+    ```python
+    # langchain: build a chain using LCEL (LangChain Expression Language)
+    from langchain_openai import ChatOpenAI
+    from langchain_core.prompts import PromptTemplate
+    from langchain_core.output_parsers import StrOutputParser
+
+    llm = ChatOpenAI(model="gpt-4o")
+    prompt = PromptTemplate.from_template("Explain {topic} in simple terms.")
+    chain = prompt | llm | StrOutputParser()
+    result = chain.invoke({"topic": "quantum computing"})
+    print(result)
+    ```
+
+    ```python
+    # pydantic-ai: type-safe agent with structured output
+    from pydantic_ai import Agent
+
+    agent = Agent('openai:gpt-4o', system_prompt='Be a helpful assistant.')
+    result = agent.run_sync('What is the capital of France?')
+    print(result.data)
+    ```
+  </Tab>
+
+  <Tab title="Data Layer">
+    Libraries for connecting agents to data sources and extracting structured information from LLM outputs.
+
+    <CardGroup cols={2}>
+      <Card
+        title="instructor"
+        icon="graduation-cap"
+        href="https://github.com/567-labs/instructor"
+      >
+        A library for extracting structured data from LLMs, powered by Pydantic.
+      </Card>
+      <Card
+        title="llama-index"
+        icon="database"
+        href="https://github.com/run-llama/llama_index"
+      >
+        A data framework for your LLM application.
+      </Card>
+      <Card
+        title="mem0"
+        icon="memory"
+        href="https://github.com/mem0ai/mem0"
+      >
+        An intelligent memory layer for AI agents enabling personalized interactions.
+      </Card>
+    </CardGroup>
+
+    ```python
+    # instructor: extract structured data from an LLM
+    import instructor
+    from openai import OpenAI
+    from pydantic import BaseModel
+
+    client = instructor.from_openai(OpenAI())
+
+    class UserDetail(BaseModel):
+        name: str
+        age: int
+
+    user = client.chat.completions.create(
+        model="gpt-4o",
+        response_model=UserDetail,
+        messages=[{"role": "user", "content": "Extract: John is 30 years old."}],
+    )
+    print(user.name, user.age)
+    ```
+  </Tab>
+
+  <Tab title="Pre-trained Models and Inference">
+    Libraries for loading, fine-tuning, and serving pre-trained models at scale.
+
+    <Tip>
+      **vllm** and **sglang** are the leading choices for high-throughput LLM serving in self-hosted deployments.
+    </Tip>
+
+    <CardGroup cols={2}>
+      <Card
+        title="diffusers"
+        icon="image"
+        href="https://github.com/huggingface/diffusers"
+      >
+        A library that provides pre-trained diffusion models for generating and editing images, audio, and video.
+      </Card>
+      <Card
+        title="sglang"
+        icon="bolt"
+        href="https://github.com/sgl-project/sglang"
+      >
+        A high-performance serving framework for large language models and multimodal models.
+      </Card>
+      <Card
+        title="transformers"
+        icon="brain"
+        href="https://github.com/huggingface/transformers"
+      >
+        A framework that lets you easily use pre-trained transformer models for NLP, vision, and audio tasks.
+      </Card>
+      <Card
+        title="unsloth"
+        icon="rabbit"
+        href="https://github.com/unslothai/unsloth"
+      >
+        A library for faster LLM fine-tuning and training with reduced memory usage.
+      </Card>
+      <Card
+        title="vllm"
+        icon="server"
+        href="https://github.com/vllm-project/vllm"
+      >
+        A high-throughput and memory-efficient inference and serving engine for LLMs.
+      </Card>
+    </CardGroup>
+
+    ```python
+    # transformers: run inference with a pre-trained model
+    from transformers import pipeline
+
+    classifier = pipeline("sentiment-analysis")
+    result = classifier("I love building AI applications with Python!")
+    print(result)
+    # [{'label': 'POSITIVE', 'score': 0.9998}]
+    ```
+  </Tab>
+</Tabs>

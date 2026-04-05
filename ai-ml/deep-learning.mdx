@@ -1,0 +1,125 @@
+---
+title: "Deep Learning"
+description: "Frameworks for neural networks and deep learning in Python."
+---
+
+Python is the de facto language for deep learning. The libraries below cover everything from low-level tensor operations and automatic differentiation to high-level training APIs and reinforcement learning. Also see [awesome-deep-learning](https://github.com/ChristosChristofidis/awesome-deep-learning).
+
+<Tip>
+  **pytorch** and **tensorflow** are the two dominant deep learning frameworks. **keras** sits on top of both and provides a high-level API that works with either backend.
+</Tip>
+
+<CardGroup cols={2}>
+  <Card
+    title="jax"
+    icon="calculator"
+    href="https://github.com/jax-ml/jax"
+  >
+    A library for high-performance numerical computing with automatic differentiation and JIT compilation.
+  </Card>
+  <Card
+    title="keras"
+    icon="layer-group"
+    href="https://github.com/keras-team/keras"
+  >
+    A high-level deep learning library with support for JAX, TensorFlow, and PyTorch backends.
+  </Card>
+  <Card
+    title="pytorch-lightning"
+    icon="bolt"
+    href="https://github.com/Lightning-AI/pytorch-lightning"
+  >
+    Deep learning framework to train, deploy, and ship AI products Lightning fast.
+  </Card>
+  <Card
+    title="pytorch"
+    icon="fire"
+    href="https://github.com/pytorch/pytorch"
+  >
+    Tensors and Dynamic neural networks in Python with strong GPU acceleration.
+  </Card>
+  <Card
+    title="stable-baselines3"
+    icon="gamepad"
+    href="https://github.com/DLR-RM/stable-baselines3"
+  >
+    PyTorch implementations of Stable Baselines (deep) reinforcement learning algorithms.
+  </Card>
+  <Card
+    title="tensorflow"
+    icon="google"
+    href="https://github.com/tensorflow/tensorflow"
+  >
+    The most popular Deep Learning framework created by Google.
+  </Card>
+</CardGroup>
+
+## Example: training a neural network with PyTorch
+
+```python
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+# Define a simple feedforward network
+class SimpleNet(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.fc1 = nn.Linear(784, 128)
+        self.relu = nn.ReLU()
+        self.fc2 = nn.Linear(128, 10)
+
+    def forward(self, x):
+        return self.fc2(self.relu(self.fc1(x)))
+
+model = SimpleNet()
+optimizer = optim.Adam(model.parameters(), lr=1e-3)
+criterion = nn.CrossEntropyLoss()
+
+# Training step
+inputs = torch.randn(32, 784)   # batch of 32 flattened 28x28 images
+labels = torch.randint(0, 10, (32,))
+
+optimizer.zero_grad()
+outputs = model(inputs)
+loss = criterion(outputs, labels)
+loss.backward()
+optimizer.step()
+
+print(f"Loss: {loss.item():.4f}")
+```
+
+## Example: structured training with PyTorch Lightning
+
+```python
+import pytorch_lightning as pl
+import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader, TensorDataset
+
+class LitModel(pl.LightningModule):
+    def __init__(self):
+        super().__init__()
+        self.layer = nn.Linear(28 * 28, 10)
+
+    def forward(self, x):
+        return self.layer(x.view(x.size(0), -1))
+
+    def training_step(self, batch, batch_idx):
+        x, y = batch
+        loss = nn.functional.cross_entropy(self(x), y)
+        self.log("train_loss", loss)
+        return loss
+
+    def configure_optimizers(self):
+        return torch.optim.Adam(self.parameters(), lr=1e-3)
+
+# Create dummy data and train
+x = torch.randn(1000, 1, 28, 28)
+y = torch.randint(0, 10, (1000,))
+dataset = TensorDataset(x, y)
+loader = DataLoader(dataset, batch_size=32)
+
+trainer = pl.Trainer(max_epochs=3)
+trainer.fit(LitModel(), loader)
+```

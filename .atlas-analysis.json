@@ -1,24 +1,11 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "name": "Awesome Python",
+  "projectType": "general",
+  "projectName": "Awesome Python",
+  "projectDescription": "An opinionated, curated directory of the best Python frameworks, libraries, tools, and resources, organized by category.",
   "theme": "palm",
-  "colors": {
-    "primary": "#f3c33c",
-    "light": "#1c5ca3",
-    "dark": "#959a6a"
-  },
-  "favicon": "https://media.brand.dev/6f49d3e8-d766-42d8-9182-9d3db569c40d.svg",
-  "navbar": {
-    "primary": {
-      "type": "github",
-      "href": "https://github.com/vinta/awesome-python"
-    }
-  },
-  "footer": {
-    "socials": {
-      "github": "https://github.com/vinta/awesome-python"
-    }
-  },
+  "primaryColor": "#f3c33c",
+  "lightColor": "#1c5ca3",
+  "darkColor": "#959a6a",
   "navigation": {
     "tabs": [
       {
@@ -77,5 +64,27 @@
         ]
       }
     ]
-  }
+  },
+  "keyFeatures": [
+    "290,000+ GitHub stars — the #10 most-starred repo on GitHub",
+    "Curated, opinionated selection — quality over quantity",
+    "Organized into 50+ categories across AI/ML, web, data, DevOps, and more",
+    "Regular updates tracking the Python ecosystem's latest tools",
+    "Covers the full Python toolchain from environment management to deployment",
+    "Includes standard library highlights alongside third-party packages"
+  ],
+  "publicApiSurface": [
+    "AI & Agents: langchain, pydantic-ai, autogen, crewai, dspy",
+    "Deep Learning: pytorch, tensorflow, keras, jax",
+    "Machine Learning: scikit-learn, xgboost, lightgbm",
+    "Web Frameworks: django, flask, fastapi, litestar, starlette",
+    "HTTP Clients: requests, httpx, aiohttp",
+    "ORMs: sqlalchemy, django.db.models, sqlmodel, peewee",
+    "Data Analysis: pandas, polars, numpy, dask",
+    "Testing: pytest, hypothesis, playwright-python",
+    "Code Quality: ruff, black, mypy, pylint",
+    "CLI: click, typer, rich, textual",
+    "Task Queues: celery, dramatiq, rq",
+    "Package Management: uv, poetry, pip"
+  ]
 }

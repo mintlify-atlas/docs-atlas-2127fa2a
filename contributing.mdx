@@ -1,0 +1,148 @@
+---
+title: "Contributing"
+description: "How to submit new libraries to Awesome Python, what criteria entries must meet, and what the review process looks like."
+---
+
+Awesome Python is an opinionated list — quality over quantity. Before submitting a pull request, read these guidelines carefully. PRs that don't follow them are closed without review.
+
+<Warning>
+  Submit **one project per PR**. PRs adding multiple projects are automatically closed.
+</Warning>
+
+## Quality requirements
+
+All submissions must satisfy **every** requirement below. A project that fails any single requirement will not be accepted.
+
+| Requirement | Details |
+|---|---|
+| **Python-first** | Primarily written in Python (>50% of codebase) |
+| **Active** | Commits within the last 12 months |
+| **Stable** | Production-ready — not alpha, beta, or experimental |
+| **Documented** | Clear README with examples and use cases |
+| **Unique** | Adds distinct value; not "yet another X" |
+| **Established** | Repository at least 1 month old |
+
+## Acceptance criteria
+
+Your submission must meet **one** of the following criteria.
+
+<AccordionGroup>
+  <Accordion title="Industry Standard">
+    The go-to tool that almost everyone uses for a specific use case.
+
+    - Limit: 1–3 tools per category
+    - Examples: `requests`, `flask`, `pandas`, `numpy`
+  </Accordion>
+  <Accordion title="Rising Star">
+    A project with rapid growth and significant community adoption.
+
+    - 5,000+ GitHub stars in less than 2 years
+    - Significant community buzz and adoption
+    - Solving problems in new or better ways
+    - Examples: `fastapi`, `ruff`, `uv`
+  </Accordion>
+  <Accordion title="Hidden Gem">
+    An exceptional niche tool with strong quality despite fewer stars.
+
+    - 100–500 stars preferred; fewer than 100 requires strong justification
+    - Solves niche problems elegantly
+    - Strong recommendation from experienced developers
+    - **Must demonstrate real-world usage** — not a project published last week
+    - Repository must be at least 6 months old with consistent activity
+    - Must include compelling justification in the PR description
+  </Accordion>
+</AccordionGroup>
+
+## Entry format
+
+**Use GitHub repository URLs** whenever possible. Projects linked to a GitHub repo are ranked higher on [awesome-python.com](https://awesome-python.com/).
+
+### Naming convention
+
+Use the **PyPI package name** as the display name so developers can copy it directly into `pip install`. Check the canonical name at `https://pypi.org/pypi/{package}/json`. If the project is not on PyPI, use the GitHub repository name instead.
+
+### Format examples
+
+**Standard entry:**
+
+```markdown
+- [pypi-name](https://github.com/owner/repo) - Description ending with period.
+```
+
+**Standard library module:**
+
+```markdown
+- [module](https://docs.python.org/3/library/module.html) - (Python standard library) Description.
+```
+
+**Fork of another project:**
+
+```markdown
+- [new-name](https://github.com/owner/new-name) - Description ([original-name](original-url) fork).
+```
+
+**Entry with related awesome list:**
+
+```markdown
+- [project](https://github.com/owner/project) - Description.
+  - [awesome-project](https://github.com/someone/awesome-project)
+```
+
+**Subcategory format:**
+
+```markdown
+- Subcategory Name
+  - [project](url) - Description.
+```
+
+<Note>
+  Keep entries in alphabetical order within each category. Alphabetical ordering within categories is mandatory.
+</Note>
+
+## Adding a new section
+
+If no existing category fits your submission, you can propose a new section.
+
+1. Add a section description in italics: `*Libraries for doing X.*`
+2. Place the section under the appropriate thematic group (e.g., **AI & ML**, **Web**, **Data & Science**)
+3. Add the section title to the Table of Contents under its group
+4. Keep entries in alphabetical order within the new category
+
+## Review process
+
+PRs are reviewed by automated tools and maintainers in the following order.
+
+<Steps>
+  <Step title="Format check">
+    The entry is verified to follow the correct format.
+  </Step>
+  <Step title="Category check">
+    The entry is confirmed to be placed in the appropriate category or subcategory.
+  </Step>
+  <Step title="Duplicate check">
+    The submission is checked against existing entries and recently-closed PRs.
+  </Step>
+  <Step title="Activity check">
+    The project is checked for recent commit activity.
+  </Step>
+  <Step title="Quality check">
+    The project is evaluated against the acceptance criteria above.
+  </Step>
+</Steps>
+
+<Tip>
+  Search previous pull requests and issues before submitting — your project may already have been reviewed or rejected.
+</Tip>
+
+## Automatic rejection
+
+PRs are closed without review if any of the following apply:
+
+- Adding multiple projects in one PR
+- Duplicate of an existing entry or a recently-closed PR
+- Empty or placeholder PR description
+- Placed under an inappropriate category
+- Project is archived or abandoned (no commits in 12+ months)
+- No documentation or unclear use case
+- Fewer than 100 GitHub stars without a Hidden Gem justification
+- Repository less than 3 months old

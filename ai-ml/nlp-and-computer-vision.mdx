@@ -1,0 +1,215 @@
+---
+title: "NLP, Computer Vision & Recommender Systems"
+description: "Libraries for natural language processing, computer vision, and building recommender systems in Python."
+---
+
+Python leads the ecosystem for text understanding, image analysis, and personalization. This page covers NLP toolkits, OCR and vision libraries, and recommender system primitives.
+
+<Tabs>
+  <Tab title="Natural Language Processing">
+    Libraries for working with human languages.
+
+    <AccordionGroup>
+      <Accordion title="General NLP">
+        <Tip>
+          **spacy** is the go-to library for production NLP pipelines. **nltk** remains the standard reference for academic and educational use.
+        </Tip>
+
+        <CardGroup cols={2}>
+          <Card
+            title="gensim"
+            icon="comments"
+            href="https://github.com/piskvorky/gensim"
+          >
+            Topic Modeling for Humans.
+          </Card>
+          <Card
+            title="nltk"
+            icon="book"
+            href="https://github.com/nltk/nltk"
+          >
+            A leading platform for building Python programs to work with human language data.
+          </Card>
+          <Card
+            title="spacy"
+            icon="microchip"
+            href="https://github.com/explosion/spaCy"
+          >
+            A library for industrial-strength natural language processing in Python and Cython.
+          </Card>
+          <Card
+            title="stanza"
+            icon="language"
+            href="https://github.com/stanfordnlp/stanza"
+          >
+            The Stanford NLP Group's official Python library, supporting 60+ languages.
+          </Card>
+        </CardGroup>
+
+        ```python
+        # spacy: named entity recognition
+        import spacy
+
+        nlp = spacy.load("en_core_web_sm")
+        doc = nlp("Apple is looking at buying U.K. startup for $1 billion.")
+
+        for ent in doc.ents:
+            print(ent.text, ent.label_)
+        # Apple  ORG
+        # U.K.   GPE
+        # $1 billion  MONEY
+        ```
+
+        ```python
+        # gensim: train a Word2Vec model
+        from gensim.models import Word2Vec
+
+        sentences = [
+            ["machine", "learning", "is", "fun"],
+            ["deep", "learning", "powers", "modern", "ai"],
+            ["python", "is", "great", "for", "machine", "learning"],
+        ]
+
+        model = Word2Vec(sentences, vector_size=100, window=5, min_count=1, workers=4)
+        similar = model.wv.most_similar("learning", topn=3)
+        print(similar)
+        ```
+      </Accordion>
+
+      <Accordion title="Chinese NLP">
+        <CardGroup cols={2}>
+          <Card
+            title="funnlp"
+            icon="language"
+            href="https://github.com/fighting41love/funNLP"
+          >
+            A collection of tools and datasets for Chinese NLP.
+          </Card>
+        </CardGroup>
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+
+  <Tab title="Computer Vision">
+    Libraries for image recognition, optical character recognition, and differentiable vision.
+
+    <Tip>
+      **opencv** is the foundational computer vision library used across research and industry. **easyocr** provides out-of-the-box OCR with minimal configuration.
+    </Tip>
+
+    <CardGroup cols={2}>
+      <Card
+        title="easyocr"
+        icon="eye"
+        href="https://github.com/JaidedAI/EasyOCR"
+      >
+        Ready-to-use OCR with 40+ languages supported.
+      </Card>
+      <Card
+        title="kornia"
+        icon="aperture"
+        href="https://github.com/kornia/kornia/"
+      >
+        Open Source Differentiable Computer Vision Library for PyTorch.
+      </Card>
+      <Card
+        title="opencv"
+        icon="camera"
+        href="https://github.com/opencv/opencv-python"
+      >
+        Open Source Computer Vision Library.
+      </Card>
+      <Card
+        title="pytesseract"
+        icon="font"
+        href="https://github.com/madmaze/pytesseract"
+      >
+        A wrapper for Google Tesseract OCR.
+      </Card>
+    </CardGroup>
+
+    ```python
+    # opencv: read an image and detect edges
+    import cv2
+
+    img = cv2.imread("photo.jpg", cv2.IMREAD_GRAYSCALE)
+    edges = cv2.Canny(img, threshold1=100, threshold2=200)
+    cv2.imwrite("edges.jpg", edges)
+    ```
+
+    ```python
+    # easyocr: extract text from an image
+    import easyocr
+
+    reader = easyocr.Reader(["en", "fr"])
+    results = reader.readtext("document.png")
+
+    for (bbox, text, confidence) in results:
+        print(f"{text!r}  (confidence: {confidence:.2f})")
+    ```
+  </Tab>
+
+  <Tab title="Recommender Systems">
+    Libraries for building recommendation engines and approximate nearest neighbor search.
+
+    <CardGroup cols={2}>
+      <Card
+        title="annoy"
+        icon="magnifying-glass"
+        href="https://github.com/spotify/annoy"
+      >
+        Approximate Nearest Neighbors in C++/Python optimized for memory usage.
+      </Card>
+      <Card
+        title="implicit"
+        icon="users"
+        href="https://github.com/benfred/implicit"
+      >
+        A fast Python implementation of collaborative filtering for implicit datasets.
+      </Card>
+      <Card
+        title="scikit-surprise"
+        icon="star"
+        href="https://github.com/NicolasHug/Surprise"
+      >
+        A scikit for building and analyzing recommender systems.
+      </Card>
+    </CardGroup>
+
+    ```python
+    # scikit-surprise: train and evaluate a collaborative filtering model
+    from surprise import SVD, Dataset, accuracy
+    from surprise.model_selection import train_test_split
+
+    data = Dataset.load_builtin("ml-100k")
+    trainset, testset = train_test_split(data, test_size=0.25, random_state=42)
+
+    model = SVD(n_factors=100, n_epochs=20)
+    model.fit(trainset)
+    predictions = model.test(testset)
+
+    accuracy.rmse(predictions)
+    ```
+
+    ```python
+    # annoy: build an index and query nearest neighbors
+    from annoy import AnnoyIndex
+    import random
+
+    dims = 128
+    index = AnnoyIndex(dims, "angular")
+
+    for i in range(1000):
+        vector = [random.gauss(0, 1) for _ in range(dims)]
+        index.add_item(i, vector)
+
+    index.build(n_trees=10)
+    index.save("embeddings.ann")
+
+    # Query
+    query = [random.gauss(0, 1) for _ in range(dims)]
+    neighbors = index.get_nns_by_vector(query, n=5)
+    print("Nearest neighbors:", neighbors)
+    ```
+  </Tab>
+</Tabs>

@@ -1,0 +1,133 @@
+---
+title: "Science & Quantum Computing"
+description: "Python libraries for scientific computing, numerical methods, biology, chemistry, physics, simulation, and quantum circuits."
+---
+
+Python is the language of choice for scientific research. This page covers the core numerical stack, domain-specific libraries for biology, chemistry, physics, and engineering, as well as emerging quantum computing frameworks.
+
+## Science
+
+Libraries for scientific computing.
+
+### Core
+
+<CardGroup cols={2}>
+  <Card title="numpy" icon="superscript" href="https://github.com/numpy/numpy">
+    A fundamental package for scientific computing with Python.
+  </Card>
+  <Card title="scipy" icon="flask" href="https://github.com/scipy/scipy">
+    A Python-based ecosystem of open-source software for mathematics, science, and engineering.
+  </Card>
+  <Card title="sympy" icon="infinity" href="https://github.com/sympy/sympy">
+    A Python library for symbolic mathematics.
+  </Card>
+  <Card title="statsmodels" icon="chart-line" href="https://github.com/statsmodels/statsmodels">
+    Statistical modeling and econometrics in Python.
+  </Card>
+  <Card title="numba" icon="microchip" href="https://github.com/numba/numba">
+    Python JIT compiler to LLVM aimed at scientific Python.
+  </Card>
+</CardGroup>
+
+```python numpy
+import numpy as np
+
+# Matrix operations
+A = np.array([[1, 2], [3, 4]])
+eigenvalues, eigenvectors = np.linalg.eig(A)
+print("Eigenvalues:", eigenvalues)
+```
+
+```python scipy
+from scipy import stats
+
+data = [2.1, 2.5, 2.3, 2.8, 2.4, 2.7]
+t_stat, p_value = stats.ttest_1samp(data, popmean=2.5)
+print(f"t-statistic: {t_stat:.3f}, p-value: {p_value:.3f}")
+```
+
+### Biology and Chemistry
+
+<CardGroup cols={2}>
+  <Card title="biopython" icon="dna" href="https://github.com/biopython/biopython">
+    Biopython is a set of freely available tools for biological computation.
+  </Card>
+  <Card title="rdkit" icon="atom" href="https://github.com/rdkit/rdkit">
+    Cheminformatics and Machine Learning Software.
+  </Card>
+  <Card title="openbabel" icon="vials" href="https://github.com/openbabel/openbabel">
+    A chemical toolbox designed to speak the many languages of chemical data.
+  </Card>
+  <Card title="cclib" icon="file-code" href="https://github.com/cclib/cclib">
+    A library for parsing and interpreting the results of computational chemistry packages.
+  </Card>
+</CardGroup>
+
+### Physics and Engineering
+
+<CardGroup cols={2}>
+  <Card title="astropy" icon="star" href="https://github.com/astropy/astropy">
+    A community Python library for Astronomy.
+  </Card>
+  <Card title="obspy" icon="wave-square" href="https://github.com/obspy/obspy">
+    A Python toolbox for seismology.
+  </Card>
+  <Card title="PythonRobotics" icon="robot" href="https://github.com/AtsushiSakai/PythonRobotics">
+    This is a compilation of various robotics algorithms with visualizations.
+  </Card>
+  <Card title="pydy" icon="gears" href="https://github.com/pydy/pydy">
+    Short for Python Dynamics, used to assist with workflow in the modeling of dynamic motion.
+  </Card>
+</CardGroup>
+
+### Simulation and Modeling
+
+<CardGroup cols={2}>
+  <Card title="pymc" icon="diagram-project" href="https://github.com/pymc-devs/pymc">
+    Probabilistic programming and Bayesian modeling in Python.
+  </Card>
+  <Card title="simpy" icon="play" href="https://gitlab.com/team-simpy/simpy">
+    A process-based discrete-event simulation framework.
+  </Card>
+  <Card title="pathsim" icon="route" href="https://github.com/pathsim/pathsim">
+    A block-based system modeling and simulation framework with a browser-based visual editor.
+  </Card>
+</CardGroup>
+
+### Other
+
+<CardGroup cols={2}>
+  <Card title="networkx" icon="circle-nodes" href="https://github.com/networkx/networkx">
+    A high-productivity software for complex networks.
+  </Card>
+  <Card title="manim" icon="film" href="https://github.com/ManimCommunity/manim">
+    An animation engine for explanatory math videos.
+  </Card>
+  <Card title="shapely" icon="shapes" href="https://github.com/shapely/shapely">
+    Manipulation and analysis of geometric objects in the Cartesian plane.
+  </Card>
+  <Card title="colour" icon="palette" href="https://github.com/colour-science/colour">
+    Implementing a comprehensive number of colour theory transformations and algorithms.
+  </Card>
+</CardGroup>
+
+---
+
+## Quantum Computing
+
+Libraries for quantum computing.
+
+<CardGroup cols={2}>
+  <Card title="qiskit" icon="atom" href="https://github.com/Qiskit/qiskit">
+    An IBM-backed quantum SDK for building, simulating, and running circuits on real quantum hardware.
+  </Card>
+  <Card title="Cirq" icon="circle-nodes" href="https://github.com/quantumlib/Cirq">
+    A Google-developed framework focused on hardware-aware quantum circuit design for NISQ devices.
+  </Card>
+  <Card title="pennylane" icon="pen" href="https://github.com/PennyLaneAI/pennylane">
+    A hybrid quantum-classical machine learning library with automatic differentiation support.
+  </Card>
+  <Card title="qutip" icon="toolbox" href="https://github.com/qutip/qutip">
+    Quantum Toolbox in Python.
+  </Card>
+</CardGroup>

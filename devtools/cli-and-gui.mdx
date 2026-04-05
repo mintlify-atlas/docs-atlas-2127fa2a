@@ -1,0 +1,219 @@
+---
+title: "CLI and GUI Development"
+description: "A curated guide to Python libraries for building command-line interfaces, terminal tools, and graphical user interfaces from the Awesome Python list."
+---
+
+Python provides rich tooling for building everything from simple CLI scripts to full graphical desktop and web-based applications. This page covers CLI frameworks, terminal rendering utilities, productivity tools, CLI enhancements, and GUI libraries.
+
+## CLI Development
+
+### CLI Frameworks
+
+<CardGroup cols={2}>
+  <Card title="click" icon="computer-mouse" href="https://github.com/pallets/click/">
+    A package for creating beautiful command line interfaces in a composable way.
+  </Card>
+  <Card title="typer" icon="bolt" href="https://github.com/fastapi/typer">
+    Modern CLI framework that uses Python type hints. Built on Click and Pydantic.
+  </Card>
+  <Card title="python-fire" icon="fire" href="https://github.com/google/python-fire">
+    A library for creating command line interfaces from absolutely any Python object.
+  </Card>
+  <Card title="python-prompt-toolkit" icon="keyboard" href="https://github.com/prompt-toolkit/python-prompt-toolkit">
+    A library for building powerful interactive command lines.
+  </Card>
+  <Card title="cement" icon="layer-group" href="https://github.com/datafolklabs/cement">
+    CLI Application Framework for Python.
+  </Card>
+  <Card title="argparse" icon="list" href="https://docs.python.org/3/library/argparse.html">
+    (Python standard library) Command-line option and argument parsing.
+  </Card>
+</CardGroup>
+
+```python click_example.py
+import click
+
+@click.command()
+@click.option("--count", default=1, help="Number of greetings")
+@click.option("--name", prompt="Your name", help="The person to greet")
+def hello(count, name):
+    """Simple program that greets NAME for a total of COUNT times."""
+    for _ in range(count):
+        click.echo(f"Hello, {name}!")
+
+if __name__ == "__main__":
+    hello()
+```
+
+```python typer_example.py
+import typer
+
+app = typer.Typer()
+
+@app.command()
+def main(name: str, count: int = 1, verbose: bool = False):
+    """Greet NAME count times."""
+    for _ in range(count):
+        typer.echo(f"Hello {name}")
+        if verbose:
+            typer.echo("(verbose mode on)")
+
+if __name__ == "__main__":
+    app()
+```
+
+### Terminal Rendering
+
+<CardGroup cols={2}>
+  <Card title="rich" icon="paint-brush" href="https://github.com/Textualize/rich">
+    Python library for rich text and beautiful formatting in the terminal. Also provides a great `RichHandler` log handler.
+  </Card>
+  <Card title="textual" icon="window-maximize" href="https://github.com/Textualize/textual">
+    A framework for building interactive user interfaces that run in the terminal and the browser.
+  </Card>
+  <Card title="tqdm" icon="bars-progress" href="https://github.com/tqdm/tqdm">
+    Fast, extensible progress bar for loops and CLI.
+  </Card>
+  <Card title="alive-progress" icon="spinner" href="https://github.com/rsalmei/alive-progress">
+    A new kind of Progress Bar, with real-time throughput, eta and very cool animations.
+  </Card>
+  <Card title="colorama" icon="palette" href="https://github.com/tartley/colorama">
+    Cross-platform colored terminal text.
+  </Card>
+  <Card title="asciimatics" icon="film" href="https://github.com/peterbrittain/asciimatics">
+    A package to create full-screen text UIs (from interactive forms to ASCII animations).
+  </Card>
+</CardGroup>
+
+```python rich_example.py
+from rich.console import Console
+from rich.table import Table
+
+console = Console()
+table = Table(title="Python Libraries")
+table.add_column("Name", style="cyan")
+table.add_column("Stars", justify="right", style="green")
+table.add_row("requests", "52k")
+table.add_row("fastapi", "78k")
+console.print(table)
+```
+
+---
+
+## CLI Tools
+
+### Productivity Tools
+
+<CardGroup cols={2}>
+  <Card title="cookiecutter" icon="cookie-bite" href="https://github.com/cookiecutter/cookiecutter">
+    A command-line utility that creates projects from cookiecutters (project templates).
+  </Card>
+  <Card title="copier" icon="copy" href="https://github.com/copier-org/copier">
+    A library and command-line utility for rendering projects templates.
+  </Card>
+  <Card title="thefuck" icon="circle-exclamation" href="https://github.com/nvbn/thefuck">
+    Correcting your previous console command.
+  </Card>
+  <Card title="xonsh" icon="terminal" href="https://github.com/xonsh/xonsh/">
+    A Python-powered shell. Full-featured and cross-platform.
+  </Card>
+  <Card title="yt-dlp" icon="download" href="https://github.com/yt-dlp/yt-dlp">
+    A command-line program to download videos from YouTube and other video sites, a fork of youtube-dl.
+  </Card>
+  <Card title="tmuxp" icon="table-columns" href="https://github.com/tmux-python/tmuxp">
+    A tmux session manager.
+  </Card>
+  <Card title="doitlive" icon="circle-play" href="https://github.com/sloria/doitlive">
+    A tool for live presentations in the terminal.
+  </Card>
+</CardGroup>
+
+### CLI Enhancements
+
+<CardGroup cols={2}>
+  <Card title="httpie" icon="globe" href="https://github.com/httpie/cli">
+    A command line HTTP client, a user-friendly cURL replacement.
+  </Card>
+  <Card title="pgcli" icon="database" href="https://github.com/dbcli/pgcli">
+    PostgreSQL CLI with autocompletion and syntax highlighting.
+  </Card>
+  <Card title="mycli" icon="database" href="https://github.com/dbcli/mycli">
+    MySQL CLI with autocompletion and syntax highlighting.
+  </Card>
+  <Card title="litecli" icon="database" href="https://github.com/dbcli/litecli">
+    SQLite CLI with autocompletion and syntax highlighting.
+  </Card>
+  <Card title="iredis" icon="database" href="https://github.com/laixintao/iredis">
+    Redis CLI with autocompletion and syntax highlighting.
+  </Card>
+</CardGroup>
+
+---
+
+## GUI Development
+
+### Desktop
+
+<CardGroup cols={2}>
+  <Card title="kivy" icon="mobile-screen" href="https://github.com/kivy/kivy">
+    A library for creating NUI applications, running on Windows, Linux, Mac OS X, Android and iOS.
+  </Card>
+  <Card title="PyQt" icon="window-restore" href="https://www.riverbankcomputing.com/static/Docs/PyQt6/">
+    Python bindings for the Qt cross-platform application and UI framework.
+  </Card>
+  <Card title="pyside" icon="window-restore" href="https://github.com/pyside/pyside-setup">
+    Qt for Python — the official Python bindings for Qt with different licensing.
+  </Card>
+  <Card title="customtkinter" icon="sliders" href="https://github.com/tomschimansky/customtkinter">
+    A modern and customizable python UI-library based on Tkinter.
+  </Card>
+  <Card title="dearpygui" icon="gamepad" href="https://github.com/hoffstadt/DearPyGui">
+    A Simple GPU accelerated Python GUI framework.
+  </Card>
+  <Card title="tkinter" icon="window-maximize" href="https://docs.python.org/3/library/tkinter.html">
+    (Python standard library) The standard Python interface to the Tcl/Tk GUI toolkit.
+  </Card>
+  <Card title="toga" icon="apple-whole" href="https://github.com/beeware/toga">
+    A Python native, OS native GUI toolkit.
+  </Card>
+  <Card title="wxPython" icon="window-restore" href="https://github.com/wxWidgets/Phoenix">
+    A blending of the wxWidgets C++ class library with the Python.
+  </Card>
+  <Card title="pyglet" icon="image" href="https://github.com/pyglet/pyglet">
+    A cross-platform windowing and multimedia library for Python.
+  </Card>
+  <Card title="pygobject" icon="linux" href="https://github.com/GNOME/pygobject">
+    Python Bindings for GLib/GObject/GIO/GTK+ (GTK+3).
+  </Card>
+  <Card title="enaml" icon="code" href="https://github.com/nucleic/enaml">
+    Creating beautiful user-interfaces with Declarative Syntax like QML.
+  </Card>
+  <Card title="gooey" icon="wand-magic-sparkles" href="https://github.com/chriskiehl/Gooey">
+    Turn command line programs into a full GUI application with one line.
+  </Card>
+</CardGroup>
+
+### Web-based
+
+<CardGroup cols={2}>
+  <Card title="flet" icon="globe" href="https://github.com/flet-dev/flet">
+    Cross-platform GUI framework for building modern apps in pure Python.
+  </Card>
+  <Card title="nicegui" icon="display" href="https://github.com/zauberzeug/nicegui">
+    An easy-to-use, Python-based UI framework, which shows up in your web browser.
+  </Card>
+  <Card title="pywebview" icon="window-maximize" href="https://github.com/r0x0r/pywebview/">
+    A lightweight cross-platform native wrapper around a webview component.
+  </Card>
+</CardGroup>
+
+### Terminal
+
+<CardGroup cols={2}>
+  <Card title="urwid" icon="terminal" href="https://github.com/urwid/urwid">
+    A library for creating terminal GUI applications with strong support for widgets, events, rich colors, etc.
+  </Card>
+  <Card title="curses" icon="terminal" href="https://docs.python.org/3/library/curses.html">
+    Built-in wrapper for ncurses used to create terminal GUI applications.
+  </Card>
+</CardGroup>

@@ -1,0 +1,463 @@
+---
+title: 'Text, Files & Media'
+description: 'Libraries for text processing, HTML/XML manipulation, file format handling, image and audio/video processing, game development, hardware, Windows integration, security, and more.'
+---
+
+Python has a rich ecosystem for working with text, documents, and media. This page covers everything from parsing plain text and manipulating HTML to processing PDFs, images, audio, and video — as well as hardware interfacing, Windows integration, cryptography, and miscellaneous utilities.
+
+## Text Processing
+
+_Libraries for parsing and manipulating plain texts._
+
+### General
+
+<CardGroup cols={2}>
+  <Card title="babel" icon="language" href="https://github.com/python-babel/babel">
+    An internationalization library for Python.
+  </Card>
+  <Card title="chardet" icon="magnifying-glass" href="https://github.com/chardet/chardet">
+    Python 2/3 compatible character encoding detector.
+  </Card>
+  <Card title="difflib" icon="code-compare" href="https://docs.python.org/3/library/difflib.html">
+    (Python standard library) Helpers for computing deltas.
+  </Card>
+  <Card title="ftfy" icon="wand-magic-sparkles" href="https://github.com/rspeer/python-ftfy">
+    Makes Unicode text less broken and more consistent automagically.
+  </Card>
+  <Card title="pangu.py" icon="align-center" href="https://github.com/vinta/pangu.py">
+    Paranoid text spacing.
+  </Card>
+  <Card title="pyfiglet" icon="font" href="https://github.com/pwaller/pyfiglet">
+    An implementation of figlet written in Python.
+  </Card>
+  <Card title="pypinyin" icon="spell-check" href="https://github.com/mozillazg/python-pinyin">
+    Convert Chinese hanzi (漢字) to pinyin (拼音).
+  </Card>
+  <Card title="python-slugify" icon="link" href="https://github.com/un33k/python-slugify">
+    A Python slugify library that translates unicode to ASCII.
+  </Card>
+  <Card title="textdistance" icon="ruler" href="https://github.com/life4/textdistance">
+    Compute distance between sequences with 30+ algorithms.
+  </Card>
+  <Card title="unidecode" icon="globe" href="https://github.com/avian2/unidecode">
+    ASCII transliterations of Unicode text.
+  </Card>
+</CardGroup>
+
+### Unique Identifiers
+
+<CardGroup cols={2}>
+  <Card title="sqids" icon="hashtag" href="https://github.com/sqids/sqids-python">
+    A library for generating short unique IDs from numbers.
+  </Card>
+  <Card title="shortuuid" icon="fingerprint" href="https://github.com/skorokithakis/shortuuid">
+    A generator library for concise, unambiguous and URL-safe UUIDs.
+  </Card>
+</CardGroup>
+
+### Parsers
+
+<CardGroup cols={2}>
+  <Card title="pygments" icon="highlighter" href="https://github.com/pygments/pygments">
+    A generic syntax highlighter.
+  </Card>
+  <Card title="pyparsing" icon="code" href="https://github.com/pyparsing/pyparsing">
+    A general purpose framework for generating parsers.
+  </Card>
+  <Card title="python-nameparser" icon="user" href="https://github.com/derek73/python-nameparser">
+    Parsing human names into their individual components.
+  </Card>
+  <Card title="python-phonenumbers" icon="phone" href="https://github.com/daviddrysdale/python-phonenumbers">
+    Parsing, formatting, storing and validating international phone numbers.
+  </Card>
+  <Card title="python-user-agents" icon="browser" href="https://github.com/selwin/python-user-agents">
+    Browser user agent parser.
+  </Card>
+  <Card title="sqlparse" icon="database" href="https://github.com/andialbrecht/sqlparse">
+    A non-validating SQL parser.
+  </Card>
+</CardGroup>
+
+## HTML Manipulation
+
+_Libraries for working with HTML and XML._
+
+<CardGroup cols={2}>
+  <Card title="beautifulsoup" icon="spider" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">
+    Providing Pythonic idioms for iterating, searching, and modifying HTML or XML.
+  </Card>
+  <Card title="justhtml" icon="code" href="https://github.com/EmilStenstrom/justhtml/">
+    A pure Python HTML5 parser that just works.
+  </Card>
+  <Card title="lxml" icon="bolt" href="https://github.com/lxml/lxml">
+    A very fast, easy-to-use and versatile library for handling HTML and XML.
+  </Card>
+  <Card title="markupsafe" icon="shield-halved" href="https://github.com/pallets/markupsafe">
+    Implements a XML/HTML/XHTML Markup safe string for Python.
+  </Card>
+  <Card title="pyquery" icon="filter" href="https://github.com/gawel/pyquery">
+    A jQuery-like library for parsing HTML.
+  </Card>
+  <Card title="tinycss2" icon="palette" href="https://github.com/Kozea/tinycss2">
+    A low-level CSS parser and generator written in Python.
+  </Card>
+  <Card title="xmltodict" icon="file-code" href="https://github.com/martinblech/xmltodict">
+    Working with XML feel like you are working with JSON.
+  </Card>
+</CardGroup>
+
+```python
+# beautifulsoup HTML parsing
+from bs4 import BeautifulSoup
+import requests
+
+response = requests.get("https://example.com")
+soup = BeautifulSoup(response.text, "html.parser")
+
+for link in soup.find_all("a", href=True):
+    print(link["href"], link.get_text(strip=True))
+```
+
+## File Format Processing
+
+_Libraries for parsing and manipulating specific text formats._
+
+### General
+
+<CardGroup cols={2}>
+  <Card title="docling" icon="file-import" href="https://github.com/docling-project/docling">
+    Library for converting documents into structured data.
+  </Card>
+  <Card title="kreuzberg" icon="file-export" href="https://github.com/kreuzberg-dev/kreuzberg">
+    High-performance document extraction library with a Rust core, supporting 62+ formats including PDF, Office, images with OCR, HTML, email, and archives.
+  </Card>
+  <Card title="pyelftools" icon="microchip" href="https://github.com/eliben/pyelftools">
+    Parsing and analyzing ELF files and DWARF debugging information.
+  </Card>
+  <Card title="tablib" icon="table" href="https://github.com/jazzband/tablib">
+    A module for Tabular Datasets in XLS, CSV, JSON, YAML.
+  </Card>
+</CardGroup>
+
+### MS Office
+
+<CardGroup cols={2}>
+  <Card title="docxtpl" icon="file-word" href="https://github.com/elapouya/python-docx-template">
+    Editing a docx document by jinja2 template.
+  </Card>
+  <Card title="openpyxl" icon="file-excel" href="https://openpyxl.readthedocs.io/en/stable/">
+    A library for reading and writing Excel 2010 xlsx/xlsm/xltx/xltm files.
+  </Card>
+  <Card title="pyexcel" icon="table-cells" href="https://github.com/pyexcel/pyexcel">
+    Providing one API for reading, manipulating and writing csv, ods, xls, xlsx and xlsm files.
+  </Card>
+  <Card title="python-docx" icon="file-lines" href="https://github.com/python-openxml/python-docx">
+    Reads, queries and modifies Microsoft Word 2007/2008 docx files.
+  </Card>
+  <Card title="python-pptx" icon="file-powerpoint" href="https://github.com/scanny/python-pptx">
+    Python library for creating and updating PowerPoint (.pptx) files.
+  </Card>
+  <Card title="xlsxwriter" icon="pen-to-square" href="https://github.com/jmcnamara/XlsxWriter">
+    A Python module for creating Excel .xlsx files.
+  </Card>
+  <Card title="xlwings" icon="arrows-left-right" href="https://github.com/xlwings/xlwings">
+    A BSD-licensed library that makes it easy to call Python from Excel and vice versa.
+  </Card>
+</CardGroup>
+
+### PDF
+
+<CardGroup cols={2}>
+  <Card title="pdf_oxide" icon="bolt" href="https://github.com/yfedoseev/pdf_oxide">
+    A fast PDF library for text extraction, image extraction, and markdown conversion, powered by Rust.
+  </Card>
+  <Card title="pdfminer.six" icon="magnifying-glass" href="https://github.com/pdfminer/pdfminer.six">
+    Pdfminer.six is a community maintained fork of the original PDFMiner.
+  </Card>
+  <Card title="pikepdf" icon="fish" href="https://github.com/pikepdf/pikepdf">
+    A powerful library for reading and editing PDF files, based on qpdf.
+  </Card>
+  <Card title="pypdf" icon="file-pdf" href="https://github.com/py-pdf/pypdf">
+    A library capable of splitting, merging, cropping, and transforming PDF pages.
+  </Card>
+  <Card title="reportlab" icon="chart-bar" href="https://www.reportlab.com/opensource/">
+    Allowing Rapid creation of rich PDF documents.
+  </Card>
+  <Card title="weasyprint" icon="print" href="https://github.com/Kozea/WeasyPrint">
+    A visual rendering engine for HTML and CSS that can export to PDF.
+  </Card>
+</CardGroup>
+
+```python
+# pypdf PDF manipulation
+from pypdf import PdfReader, PdfWriter
+
+reader = PdfReader("input.pdf")
+writer = PdfWriter()
+
+# Extract specific pages
+for page_num in [0, 2, 4]:
+    writer.add_page(reader.pages[page_num])
+
+with open("output.pdf", "wb") as f:
+    writer.write(f)
+```
+
+### Markdown
+
+<CardGroup cols={2}>
+  <Card title="markdown-it-py" icon="markdown" href="https://github.com/executablebooks/markdown-it-py">
+    Markdown parser with 100% CommonMark support, extensions, and syntax plugins.
+  </Card>
+  <Card title="markdown" icon="file-lines" href="https://github.com/waylan/Python-Markdown">
+    A Python implementation of John Gruber's Markdown.
+  </Card>
+  <Card title="markitdown" icon="arrows-rotate" href="https://github.com/microsoft/markitdown">
+    Python tool for converting files and office documents to Markdown.
+  </Card>
+  <Card title="mistune" icon="bolt" href="https://github.com/lepture/mistune">
+    Fastest and full featured pure Python parsers of Markdown.
+  </Card>
+</CardGroup>
+
+### Data Formats
+
+<CardGroup cols={2}>
+  <Card title="csvkit" icon="table" href="https://github.com/wireservice/csvkit">
+    Utilities for converting to and working with CSV.
+  </Card>
+  <Card title="pyyaml" icon="file-code" href="https://github.com/yaml/pyyaml">
+    YAML implementations for Python.
+  </Card>
+  <Card title="tomllib" icon="file-lines" href="https://docs.python.org/3/library/tomllib.html">
+    (Python standard library) Parse TOML files.
+  </Card>
+</CardGroup>
+
+## File Manipulation
+
+_Libraries for file manipulation._
+
+<CardGroup cols={2}>
+  <Card title="mimetypes" icon="tags" href="https://docs.python.org/3/library/mimetypes.html">
+    (Python standard library) Map filenames to MIME types.
+  </Card>
+  <Card title="pathlib" icon="folder-open" href="https://docs.python.org/3/library/pathlib.html">
+    (Python standard library) A cross-platform, object-oriented path library.
+  </Card>
+  <Card title="python-magic" icon="wand-magic" href="https://github.com/ahupp/python-magic">
+    A Python interface to the libmagic file type identification library.
+  </Card>
+  <Card title="watchdog" icon="eye" href="https://github.com/gorakhargosh/watchdog">
+    API and shell utilities to monitor file system events.
+  </Card>
+  <Card title="watchfiles" icon="clock-rotate-left" href="https://github.com/samuelcolvin/watchfiles">
+    Simple, modern and fast file watching and code reload in python.
+  </Card>
+</CardGroup>
+
+## Image Processing
+
+_Libraries for manipulating images._
+
+<CardGroup cols={2}>
+  <Card title="pillow" icon="image" href="https://github.com/python-pillow/Pillow">
+    Pillow is the friendly PIL fork.
+  </Card>
+  <Card title="pymatting" icon="scissors" href="https://github.com/pymatting/pymatting">
+    A library for alpha matting.
+  </Card>
+  <Card title="python-barcode" icon="barcode" href="https://github.com/WhyNotHugo/python-barcode">
+    Create barcodes in Python with no extra dependencies.
+  </Card>
+  <Card title="python-qrcode" icon="qrcode" href="https://github.com/lincolnloop/python-qrcode">
+    A pure Python QR Code generator.
+  </Card>
+  <Card title="pyvips" icon="bolt" href="https://github.com/libvips/pyvips">
+    A fast image processing library with low memory needs.
+  </Card>
+  <Card title="scikit-image" icon="flask" href="https://github.com/scikit-image/scikit-image">
+    A Python library for (scientific) image processing.
+  </Card>
+  <Card title="thumbor" icon="crop" href="https://github.com/thumbor/thumbor">
+    A smart imaging service. It enables on-demand crop, re-sizing and flipping of images.
+  </Card>
+  <Card title="wand" icon="wand-sparkles" href="https://github.com/emcconville/wand">
+    Python bindings for MagickWand, C API for ImageMagick.
+  </Card>
+</CardGroup>
+
+```python
+# Pillow image processing
+from PIL import Image, ImageFilter
+
+img = Image.open("photo.jpg")
+img_resized = img.resize((800, 600))
+img_blurred = img_resized.filter(ImageFilter.GaussianBlur(radius=2))
+img_blurred.save("photo_processed.jpg", quality=85)
+```
+
+## Audio & Video Processing
+
+_Libraries for manipulating audio, video, and their metadata._
+
+### Audio
+
+<CardGroup cols={2}>
+  <Card title="gtts" icon="volume-high" href="https://github.com/pndurette/gTTS">
+    Python library and CLI tool for converting text to speech using Google Translate TTS.
+  </Card>
+  <Card title="librosa" icon="music" href="https://github.com/librosa/librosa">
+    Python library for audio and music analysis.
+  </Card>
+  <Card title="matchering" icon="sliders" href="https://github.com/sergree/matchering">
+    A library for automated reference audio mastering.
+  </Card>
+  <Card title="pydub" icon="wave-square" href="https://github.com/jiaaro/pydub">
+    Manipulate audio with a simple and easy high level interface.
+  </Card>
+</CardGroup>
+
+### Video
+
+<CardGroup cols={2}>
+  <Card title="moviepy" icon="film" href="https://github.com/Zulko/moviepy">
+    A module for script-based movie editing with many formats, including animated GIFs.
+  </Card>
+  <Card title="vidgear" icon="video" href="https://github.com/abhiTronix/vidgear">
+    Most Powerful multi-threaded Video Processing framework.
+  </Card>
+</CardGroup>
+
+### Metadata
+
+<CardGroup cols={2}>
+  <Card title="beets" icon="tag" href="https://github.com/beetbox/beets">
+    A music library manager and MusicBrainz tagger.
+  </Card>
+  <Card title="mutagen" icon="compact-disc" href="https://github.com/quodlibet/mutagen">
+    A Python module to handle audio metadata.
+  </Card>
+  <Card title="tinytag" icon="tags" href="https://github.com/devsnd/tinytag">
+    A library for reading music meta data of MP3, OGG, FLAC and Wave files.
+  </Card>
+</CardGroup>
+
+## Game Development
+
+_Awesome game development libraries._
+
+<CardGroup cols={2}>
+  <Card title="arcade" icon="gamepad" href="https://github.com/pythonarcade/arcade">
+    Arcade is a modern Python framework for crafting games with compelling graphics and sound.
+  </Card>
+  <Card title="panda3d" icon="cube" href="https://github.com/panda3d/panda3d">
+    3D game engine developed by Disney.
+  </Card>
+  <Card title="py-sdl2" icon="computer-mouse" href="https://github.com/py-sdl/py-sdl2">
+    A ctypes based wrapper for the SDL2 library.
+  </Card>
+  <Card title="pygame" icon="ghost" href="https://github.com/pygame/pygame">
+    Pygame is a set of Python modules designed for writing games.
+  </Card>
+  <Card title="pyopengl" icon="draw-polygon" href="https://github.com/mcfletch/pyopengl">
+    Python ctypes bindings for OpenGL and it's related APIs.
+  </Card>
+  <Card title="renpy" icon="book-open" href="https://github.com/renpy/renpy">
+    A Visual Novel engine.
+  </Card>
+</CardGroup>
+
+## Hardware
+
+_Libraries for programming with hardware._
+
+<CardGroup cols={2}>
+  <Card title="bleak" icon="bluetooth" href="https://github.com/hbldh/bleak">
+    A cross platform Bluetooth Low Energy Client for Python using asyncio.
+  </Card>
+  <Card title="pynput" icon="keyboard" href="https://github.com/moses-palmer/pynput">
+    A library to control and monitor input devices.
+  </Card>
+</CardGroup>
+
+## Microsoft Windows
+
+_Python programming on Microsoft Windows._
+
+<CardGroup cols={2}>
+  <Card title="pythonnet" icon="microsoft" href="https://github.com/pythonnet/pythonnet">
+    Python Integration with the .NET Common Language Runtime (CLR).
+  </Card>
+  <Card title="pywin32" icon="windows" href="https://github.com/mhammond/pywin32">
+    Python Extensions for Windows.
+  </Card>
+  <Card title="winpython" icon="laptop" href="https://github.com/winpython/winpython">
+    Portable development environment for Windows 10/11.
+  </Card>
+</CardGroup>
+
+## Security
+
+### Cryptography
+
+<CardGroup cols={2}>
+  <Card title="cryptography" icon="lock" href="https://github.com/pyca/cryptography">
+    A package designed to expose cryptographic primitives and recipes to Python developers.
+  </Card>
+  <Card title="paramiko" icon="terminal" href="https://github.com/paramiko/paramiko">
+    The leading native Python SSHv2 protocol library.
+  </Card>
+  <Card title="pynacl" icon="shield" href="https://github.com/pyca/pynacl">
+    Python binding to the Networking and Cryptography (NaCl) library.
+  </Card>
+</CardGroup>
+
+```python
+# cryptography — secure encryption
+from cryptography.fernet import Fernet
+
+key = Fernet.generate_key()
+cipher = Fernet(key)
+
+message = b"Secret message"
+encrypted = cipher.encrypt(message)
+decrypted = cipher.decrypt(encrypted)
+assert decrypted == message
+```
+
+### Penetration Testing
+
+<CardGroup cols={2}>
+  <Card title="mitmproxy" icon="network-wired" href="https://github.com/mitmproxy/mitmproxy">
+    An interactive TLS-capable intercepting HTTP proxy for penetration testers and software developers.
+  </Card>
+  <Card title="setoolkit" icon="user-secret" href="https://github.com/trustedsec/social-engineer-toolkit">
+    A toolkit for social engineering.
+  </Card>
+  <Card title="sherlock" icon="magnifying-glass" href="https://github.com/sherlock-project/sherlock">
+    Hunt down social media accounts by username across social networks.
+  </Card>
+  <Card title="sqlmap" icon="database" href="https://github.com/sqlmapproject/sqlmap">
+    Automatic SQL injection and database takeover tool.
+  </Card>
+</CardGroup>
+
+## Miscellaneous
+
+_Useful libraries or tools that don't fit in the categories above._
+
+<CardGroup cols={2}>
+  <Card title="blinker" icon="bell" href="https://github.com/jek/blinker">
+    A fast Python in-process signal/event dispatching system.
+  </Card>
+  <Card title="boltons" icon="wrench" href="https://github.com/mahmoud/boltons">
+    A set of pure-Python utilities.
+  </Card>
+  <Card title="itsdangerous" icon="shield-halved" href="https://github.com/pallets/itsdangerous">
+    Various helpers to pass trusted data to untrusted environments.
+  </Card>
+  <Card title="tryton" icon="briefcase" href="https://github.com/tryton/tryton">
+    A general-purpose business framework.
+  </Card>
+</CardGroup>

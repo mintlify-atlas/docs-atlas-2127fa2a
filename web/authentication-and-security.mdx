@@ -1,0 +1,56 @@
+---
+title: "Authentication"
+description: "Libraries for implementing OAuth, JWT, and permission-based authentication schemes in Python web applications."
+---
+
+Authentication is a foundational concern in web development. Python's ecosystem provides well-maintained libraries for OAuth 2.0 flows, JSON Web Tokens, and fine-grained object-level permissions — both as standalone tools and as Django integrations.
+
+## Authentication
+
+Libraries for implementing authentication schemes.
+
+<Tabs>
+  <Tab title="OAuth">
+    <CardGroup cols={2}>
+      <Card title="oauthlib" icon="key" href="https://github.com/oauthlib/oauthlib">
+        A generic and thorough implementation of the OAuth request-signing logic.
+      </Card>
+      <Card title="authlib" icon="shield-halved" href="https://github.com/authlib/authlib">
+        JavaScript Object Signing and Encryption draft implementation.
+      </Card>
+      <Card title="django-allauth" icon="layer-group" href="https://github.com/pennersr/django-allauth">
+        Authentication app for Django that "just works."
+      </Card>
+      <Card title="django-oauth-toolkit" icon="layer-group" href="https://github.com/django-oauth/django-oauth-toolkit">
+        OAuth 2 goodies for Django.
+      </Card>
+    </CardGroup>
+  </Tab>
+  <Tab title="JWT">
+    <CardGroup cols={2}>
+      <Card title="pyjwt" icon="id-badge" href="https://github.com/jpadilla/pyjwt">
+        JSON Web Token implementation in Python.
+      </Card>
+    </CardGroup>
+  </Tab>
+  <Tab title="Permissions">
+    <CardGroup cols={2}>
+      <Card title="django-guardian" icon="shield" href="https://github.com/django-guardian/django-guardian">
+        Implementation of per object permissions for Django 1.2+
+      </Card>
+      <Card title="django-rules" icon="list-check" href="https://github.com/dfunckt/django-rules">
+        A tiny but powerful app providing object-level permissions to Django, without requiring a database.
+      </Card>
+    </CardGroup>
+  </Tab>
+</Tabs>
+
+### PyJWT example
+
+```python
+import jwt
+
+payload = {"user_id": 42, "exp": 1893456000}
+token = jwt.encode(payload, "secret-key", algorithm="HS256")
+decoded = jwt.decode(token, "secret-key", algorithms=["HS256"])
+```

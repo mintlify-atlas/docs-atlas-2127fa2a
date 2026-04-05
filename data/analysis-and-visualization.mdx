@@ -1,0 +1,213 @@
+---
+title: "Data Analysis & Visualization"
+description: "Python libraries for data analysis, validation, visualization, and geolocation — from dataframes to interactive dashboards to geographic data."
+---
+
+Python has a rich ecosystem for working with data. This page covers libraries for analyzing tabular and financial data, validating data structures, building charts and dashboards, and working with geographic coordinates.
+
+## Data Analysis
+
+Libraries for data analysis, from general-purpose dataframe tools to financial data sources.
+
+### General
+
+<CardGroup cols={2}>
+  <Card title="pandas" icon="table" href="https://github.com/pandas-dev/pandas">
+    A library providing high-performance, easy-to-use data structures and data analysis tools.
+  </Card>
+  <Card title="polars" icon="bolt" href="https://github.com/pola-rs/polars">
+    A fast DataFrame library implemented in Rust with a Python API.
+  </Card>
+  <Card title="modin" icon="arrows-split-up-and-left" href="https://github.com/modin-project/modin">
+    A drop-in pandas replacement that scales workflows by changing a single line of code.
+  </Card>
+  <Card title="ibis" icon="layer-group" href="https://github.com/ibis-project/ibis">
+    A portable Python dataframe library with a single API for 20+ backends.
+  </Card>
+  <Card title="aws-sdk-pandas" icon="cloud" href="https://github.com/aws/aws-sdk-pandas">
+    Pandas on AWS.
+  </Card>
+  <Card title="datasette" icon="magnifying-glass-chart" href="https://github.com/simonw/datasette">
+    An open source multi-tool for exploring and publishing data.
+  </Card>
+  <Card title="desbordante" icon="binoculars" href="https://github.com/desbordante/desbordante-core/">
+    An open source data profiler for complex pattern discovery.
+  </Card>
+  <Card title="pathway" icon="diagram-project" href="https://github.com/pathwaycom/pathway">
+    Real-time data processing framework for Python with reactive dataflows.
+  </Card>
+</CardGroup>
+
+```python pandas
+import pandas as pd
+
+df = pd.read_csv("data.csv")
+summary = df.groupby("category").agg({"sales": "sum", "quantity": "mean"})
+print(summary.head())
+```
+
+```python polars
+import polars as pl
+
+df = pl.read_csv("data.csv")
+result = (
+    df.group_by("category")
+    .agg([pl.col("sales").sum(), pl.col("quantity").mean()])
+    .sort("sales", descending=True)
+)
+```
+
+### Financial Data
+
+<CardGroup cols={2}>
+  <Card title="yfinance" icon="chart-line" href="https://github.com/ranaroussi/yfinance">
+    Easy Pythonic way to download market and financial data from Yahoo Finance.
+  </Card>
+  <Card title="openbb" icon="building-columns" href="https://github.com/OpenBB-finance/OpenBB">
+    A financial data platform for analysts, quants and AI agents.
+  </Card>
+  <Card title="akshare" icon="yen-sign" href="https://github.com/akfamily/akshare">
+    A financial data interface library, built for human beings!
+  </Card>
+  <Card title="edgartools" icon="file-invoice-dollar" href="https://github.com/dgunning/edgartools">
+    Library for downloading structured data from SEC EDGAR filings and XBRL financial statements.
+  </Card>
+</CardGroup>
+
+---
+
+## Data Validation
+
+Libraries for validating data. Used for forms in many cases.
+
+<CardGroup cols={2}>
+  <Card title="pydantic" icon="shield-check" href="https://github.com/pydantic/pydantic">
+    Data validation using Python type hints.
+  </Card>
+  <Card title="pandera" icon="table-list" href="https://github.com/unionai-oss/pandera">
+    A data validation library for dataframes, with support for pandas, polars, and Spark.
+  </Card>
+  <Card title="cerberus" icon="circle-check" href="https://github.com/pyeve/cerberus">
+    A lightweight and extensible data validation library.
+  </Card>
+  <Card title="jsonschema" icon="code" href="https://github.com/python-jsonschema/jsonschema">
+    An implementation of JSON Schema for Python.
+  </Card>
+  <Card title="voluptuous" icon="lock" href="https://github.com/alecthomas/voluptuous">
+    A Python data validation library primarily intended for validating data from untrusted sources.
+  </Card>
+</CardGroup>
+
+```python pydantic
+from pydantic import BaseModel, EmailStr
+
+class User(BaseModel):
+    name: str
+    email: EmailStr
+    age: int
+
+user = User(name="Alice", email="alice@example.com", age=30)
+print(user.model_dump())
+```
+
+---
+
+## Data Visualization
+
+Libraries for visualizing data.
+
+### Plotting
+
+<CardGroup cols={2}>
+  <Card title="matplotlib" icon="chart-area" href="https://github.com/matplotlib/matplotlib">
+    A Python 2D plotting library.
+  </Card>
+  <Card title="seaborn" icon="chart-bar" href="https://github.com/mwaskom/seaborn">
+    Statistical data visualization using Matplotlib.
+  </Card>
+  <Card title="plotly" icon="chart-pie" href="https://github.com/plotly/plotly.py">
+    Interactive graphing library for Python.
+  </Card>
+  <Card title="altair" icon="chart-simple" href="https://github.com/vega/altair">
+    Declarative statistical visualization library for Python.
+  </Card>
+  <Card title="bokeh" icon="circle-dot" href="https://github.com/bokeh/bokeh">
+    Interactive Web Plotting for Python.
+  </Card>
+  <Card title="plotnine" icon="square-root-variable" href="https://github.com/has2k1/plotnine">
+    A grammar of graphics for Python based on ggplot2.
+  </Card>
+  <Card title="pygal" icon="shapes" href="https://github.com/Kozea/pygal">
+    A Python SVG Charts Creator.
+  </Card>
+  <Card title="bqplot" icon="cubes" href="https://github.com/bqplot/bqplot">
+    Interactive Plotting Library for the Jupyter Notebook.
+  </Card>
+  <Card title="pyqtgraph" icon="wave-square" href="https://github.com/pyqtgraph/pyqtgraph">
+    Interactive and realtime 2D/3D/Image plotting and science/engineering widgets.
+  </Card>
+  <Card title="ultraplot" icon="pen-ruler" href="https://github.com/ultraplot/UltraPlot">
+    Matplotlib wrapper for publication-ready scientific figures with minimal code. Includes advanced subplot management, panel layouts, and batteries-included geoscience plotting.
+  </Card>
+  <Card title="vispy" icon="eye" href="https://github.com/vispy/vispy">
+    High-performance scientific visualization based on OpenGL.
+  </Card>
+</CardGroup>
+
+```python matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0, 2 * np.pi, 100)
+plt.plot(x, np.sin(x), label="sin(x)")
+plt.plot(x, np.cos(x), label="cos(x)")
+plt.legend()
+plt.title("Trigonometric Functions")
+plt.show()
+```
+
+### Specialized
+
+<CardGroup cols={2}>
+  <Card title="cartopy" icon="earth-americas" href="https://github.com/SciTools/cartopy">
+    A cartographic python library with matplotlib support.
+  </Card>
+  <Card title="pygraphviz" icon="diagram-project" href="https://github.com/pygraphviz/pygraphviz/">
+    Python interface to Graphviz.
+  </Card>
+</CardGroup>
+
+### Dashboards and Apps
+
+<CardGroup cols={2}>
+  <Card title="streamlit" icon="display" href="https://github.com/streamlit/streamlit">
+    A framework which lets you build dashboards, generate reports, or create chat apps in minutes.
+  </Card>
+  <Card title="gradio" icon="sliders" href="https://github.com/gradio-app/gradio">
+    Build and share machine learning apps, all in Python.
+  </Card>
+</CardGroup>
+
+---
+
+## Geolocation
+
+Libraries for geocoding addresses and working with latitudes and longitudes.
+
+<CardGroup cols={2}>
+  <Card title="geopy" icon="location-dot" href="https://github.com/geopy/geopy">
+    Python Geocoding Toolbox.
+  </Card>
+  <Card title="geopandas" icon="map" href="https://github.com/geopandas/geopandas">
+    Python tools for geographic data (GeoSeries/GeoDataFrame) built on pandas.
+  </Card>
+  <Card title="geojson" icon="globe" href="https://github.com/jazzband/geojson">
+    Python bindings and utilities for GeoJSON.
+  </Card>
+  <Card title="django-countries" icon="flag" href="https://github.com/SmileyChris/django-countries">
+    A Django app that provides a country field for models and forms.
+  </Card>
+  <Card title="geodjango" icon="compass" href="https://github.com/django/django">
+    A world-class geographic web framework that is part of Django.
+  </Card>
+</CardGroup>

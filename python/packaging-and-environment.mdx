@@ -1,0 +1,155 @@
+---
+title: 'Packaging & Environment'
+description: 'Tools for managing Python versions, virtual environments, packages, repositories, distribution, and configuration files.'
+---
+
+A reliable toolchain is the foundation of every Python project. This page covers environment and version management, package installation, private repository hosting, building distributable artifacts, and reading configuration files.
+
+## Environment Management
+
+_Libraries for Python version and virtual environment management._
+
+<CardGroup cols={2}>
+  <Card title="pyenv" icon="code-branch" href="https://github.com/pyenv/pyenv">
+    Simple Python version management.
+  </Card>
+  <Card title="pyenv-win" icon="windows" href="https://github.com/pyenv-win/pyenv-win">
+    Pyenv for Windows.
+  </Card>
+  <Card title="uv" icon="rocket" href="https://github.com/astral-sh/uv">
+    An extremely fast Python version, package and project manager, written in Rust.
+  </Card>
+  <Card title="virtualenv" icon="box" href="https://github.com/pypa/virtualenv">
+    A tool to create isolated Python environments.
+  </Card>
+</CardGroup>
+
+```bash
+# pyenv — Python version management
+pyenv install 3.12.0       # install Python version
+pyenv global 3.12.0        # set global version
+pyenv local 3.11.5         # set project-level version
+```
+
+```bash
+# uv — fast Python package manager
+uv init myproject          # create new project
+uv add requests fastapi    # add dependencies
+uv run python main.py      # run with managed env
+uv sync                    # sync deps from pyproject.toml
+```
+
+## Package Management
+
+_Libraries for package and dependency management._
+
+<CardGroup cols={2}>
+  <Card title="conda" icon="layer-group" href="https://github.com/conda/conda/">
+    Cross-platform, Python-agnostic binary package manager.
+  </Card>
+  <Card title="pip" icon="download" href="https://github.com/pypa/pip">
+    The package installer for Python.
+  </Card>
+  <Card title="pipx" icon="square-arrow-up-right" href="https://github.com/pypa/pipx">
+    Install and Run Python Applications in Isolated Environments. Like `npx` in Node.js.
+  </Card>
+  <Card title="poetry" icon="feather" href="https://github.com/python-poetry/poetry">
+    Python dependency management and packaging made easy.
+  </Card>
+  <Card title="uv" icon="rocket" href="https://github.com/astral-sh/uv">
+    An extremely fast Python version, package and project manager, written in Rust.
+  </Card>
+</CardGroup>
+
+```bash
+# poetry — dependency management
+poetry new myproject       # scaffold new project
+poetry add requests        # add dependency
+poetry add --dev pytest    # add dev dependency
+poetry install             # install all deps
+poetry run python main.py  # run script
+```
+
+## Package Repositories
+
+_Local PyPI repository server and proxies._
+
+<CardGroup cols={2}>
+  <Card title="bandersnatch" icon="server" href="https://github.com/pypa/bandersnatch/">
+    PyPI mirroring tool provided by Python Packaging Authority (PyPA).
+  </Card>
+  <Card title="devpi" icon="database" href="https://github.com/devpi/devpi">
+    PyPI server and packaging/testing/release tool.
+  </Card>
+  <Card title="warehouse" icon="warehouse" href="https://github.com/pypa/warehouse">
+    Next generation Python Package Repository (PyPI).
+  </Card>
+</CardGroup>
+
+## Distribution
+
+_Libraries to create packaged executables for release distribution._
+
+<CardGroup cols={2}>
+  <Card title="cx-Freeze" icon="snowflake" href="https://github.com/marcelotduarte/cx_Freeze">
+    A Python tool that converts Python scripts into standalone executables and installers for Windows, macOS, and Linux.
+  </Card>
+  <Card title="Nuitka" icon="bolt" href="https://github.com/Nuitka/Nuitka">
+    Compiles Python programs into high-performance standalone executables (cross-platform, supports all Python versions).
+  </Card>
+  <Card title="pyarmor" icon="shield" href="https://github.com/dashingsoft/pyarmor">
+    A tool used to obfuscate python scripts, bind obfuscated scripts to fixed machine or expire obfuscated scripts.
+  </Card>
+  <Card title="pyinstaller" icon="box-archive" href="https://github.com/pyinstaller/pyinstaller">
+    Converts Python programs into stand-alone executables (cross-platform).
+  </Card>
+  <Card title="shiv" icon="file-zipper" href="https://github.com/linkedin/shiv">
+    A command line utility for building fully self-contained zipapps (PEP 441), but with all their dependencies included.
+  </Card>
+</CardGroup>
+
+## Configuration Files
+
+_Libraries for storing and parsing configuration options._
+
+<CardGroup cols={2}>
+  <Card title="configparser" icon="sliders" href="https://docs.python.org/3/library/configparser.html">
+    (Python standard library) INI file parser.
+  </Card>
+  <Card title="dynaconf" icon="gears" href="https://github.com/dynaconf/dynaconf">
+    Dynaconf is a configuration manager with plugins for Django, Flask and FastAPI.
+  </Card>
+  <Card title="hydra" icon="water" href="https://github.com/facebookresearch/hydra">
+    Hydra is a framework for elegantly configuring complex applications.
+  </Card>
+  <Card title="python-decouple" icon="key" href="https://github.com/HBNetwork/python-decouple">
+    Strict separation of settings from code.
+  </Card>
+  <Card title="python-dotenv" icon="file-lines" href="https://github.com/theskumar/python-dotenv">
+    Reads key-value pairs from a `.env` file and sets them as environment variables.
+  </Card>
+</CardGroup>
+
+```python
+# python-dotenv — environment configuration
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # loads .env file
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+SECRET_KEY = os.getenv("SECRET_KEY", "default-dev-key")
+```
+
+```python
+# dynaconf — advanced configuration
+from dynaconf import Dynaconf
+
+settings = Dynaconf(
+    settings_files=["settings.toml", ".secrets.toml"],
+    environments=True,
+)
+
+print(settings.DATABASE_URL)
+print(settings.DEBUG)
+```
